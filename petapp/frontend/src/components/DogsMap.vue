@@ -1,36 +1,26 @@
 <template>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <div class="row">
-                <!-- dog icon-click to switch to cat map -->
-                <a class="navbar-brand">
-                    <div class="col-3">
-                            <img loading="auto" src="/media/dogicon.png" width="75">
-                    </div>
-                </a>
-
-                <!-- filters -->
-                <div class="collapse navbar-collapse">
-                    <div class="navbar-nav">
-                        <div class="col-6">
-                            FILTER BY:
-                        </div>
-
-                        <div class="col-2">
-                            X
-                        </div>
-
-                        <div class="col-2">
-                            Y
-                        </div>
-
-                        <div class="col-2">
-                            Z
-                        </div>
-                    </div>
-                </div>
+        <!-- dog icon-click to switch to cat map -->
+        <a class="navbar-brand">
+            <div>
+                <img loading="auto" src="/media/dogicon.png" width="75"> Filter By:
             </div>
-        </div>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- filters -->
+        <div class="collapse navbar-collapse">
+            <div class="nav navbar-nav">
+                <a class="nav-item nav-link">X</a>
+                <a class="nav-item nav-link">Y</a>
+                <a class="nav-item nav-link">Z</a>
+
+                <button class="btn btn-outline-success my-2 my-sm-0">Done</button>
+            </div>
+        </div>   
     </nav>
 
     <div class="container">
