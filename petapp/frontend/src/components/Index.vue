@@ -7,7 +7,7 @@
         <h1>HOME PAGE</h1>
     </div>
 
-    <div>
+    <div class="vstack gap-2 col-md-5 mx-auto">
         <div>
             <a>
                 <button>
