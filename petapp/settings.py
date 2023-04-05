@@ -32,9 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-        'finalproject',
-
-    # 'petapp.apps.PetappConfig',
+    'petapp.apps.PetappConfig',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -73,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-AUTH_USER_MODEL = 'finalproject.CustomUser'
+# AUTH_USER_MODEL = 'finalproject.CustomUser'
 
 WSGI_APPLICATION = "petapp.wsgi.application"
 
