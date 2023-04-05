@@ -1,8 +1,9 @@
 from django.contrib import admin
 
-from .models import User, Pet
+from .models import CustomUser, Pet
 
 # Register your models here.
 
-admin.site.register(User)
+
+admin.site.register(CustomUser)
 admin.site.register(Pet)

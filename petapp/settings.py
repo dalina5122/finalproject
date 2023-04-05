@@ -32,13 +32,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'petapp.apps.PetappConfig',
+        'finalproject',
+
+    # 'petapp.apps.PetappConfig',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
 ]
 
 MIDDLEWARE = [
@@ -51,9 +54,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "finalproject.urls"
+ROOT_URLCONF = "petapp.urls"
 
-AUTH_USER_MODEL = 'petapp.User'
 
 TEMPLATES = [
     {
@@ -71,7 +73,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "finalproject.wsgi.application"
+AUTH_USER_MODEL = 'finalproject.CustomUser'
+
+WSGI_APPLICATION = "petapp.wsgi.application"
 
 
 # Database
