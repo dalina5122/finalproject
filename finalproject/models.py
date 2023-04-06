@@ -8,6 +8,9 @@ from django.contrib.auth.models import AbstractUser
 # )
 
 class CustomUser(AbstractUser):
+    class Meta:
+        db_table = 'auth_user'
+
     profile_image=models.ImageField(default='default.jpg', upload_to='profile_images/')
     date_of_birth=models.DateField(null=True)
 

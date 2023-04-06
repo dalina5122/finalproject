@@ -1,8 +1,12 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
 from .models import CustomUser, Pet
 
 # Register your models here.
 
-admin.site.register(CustomUser)
+class CustomUserAdmin(UserAdmin):
+    model = CustomUser
+
+admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Pet)
