@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractUser
 #     ('unknown'),
 # )
 
-class CustomUser(AbstractUser):
+class User(AbstractUser):
     profile_image=models.ImageField(default='default.jpg', upload_to='profile_images/')
     date_of_birth=models.DateField(null=True)
 
