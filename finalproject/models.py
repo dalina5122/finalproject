@@ -1,33 +1,35 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from users.models import User
+
 # GENDER_CHOICES=(
 #     ('female'),
 #     ('male'),
 #     ('unknown'),
 # )
 
-class User(AbstractUser):
-    profile_image=models.ImageField(default='default.jpg', upload_to='profile_images/')
-    date_of_birth=models.DateField(null=True)
+# class User(AbstractUser):
+#     profile_image=models.ImageField(default='default.jpg', upload_to='profile_images/')
+#     date_of_birth=models.DateField(null=True)
 
-    def __str__(self):
-        """
-        Display the object name when printing the object
-        """
-        return self.username
+#     def __str__(self):
+#         """
+#         Display the object name when printing the object
+#         """
+#         return self.username
 
-    def to_dict(self):
-        """
-        Use this to return a dictionary of the User object
-        """
-        return{
-            'id': self.id,
-            'date_of_birth': self.date_of_birth,
-            'username' : self.username,
-            'email' : self.email,
-            'profile_image' : self.profile_image.url,
-        }
+#     def to_dict(self):
+#         """
+#         Use this to return a dictionary of the User object
+#         """
+#         return{
+#             'id': self.id,
+#             'date_of_birth': self.date_of_birth,
+#             'username' : self.username,
+#             'email' : self.email,
+#             'profile_image' : self.profile_image.url,
+#         }
 
 class Pet(models.Model):
     picture=models.ImageField(upload_to='pet_images', blank=True, null=True)
@@ -39,7 +41,7 @@ class Pet(models.Model):
     date=models.DateField(null=True)
     breed=models.CharField(max_length=200)
     # gender=models.CharField(max_length=3, choices=GENDER_CHOICES, default='unknown')
-    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         """

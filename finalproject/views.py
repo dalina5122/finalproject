@@ -6,6 +6,9 @@ import json
 
 from .models import Index, DogsMap, CatsMap
 
+from users.models import User
+
+
 def newdog_api(request):
     if request.method == "GET":
         return JsonResponse({
