@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-from users.models import User
+from users.models import CustomUser
 
 # GENDER_CHOICES=(
 #     ('female'),

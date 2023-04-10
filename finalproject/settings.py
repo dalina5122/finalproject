@@ -42,8 +42,6 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     # 'petapp.apps.PetappConfig',
     'finalproject',
-
-
 ]
 
 MIDDLEWARE = [
