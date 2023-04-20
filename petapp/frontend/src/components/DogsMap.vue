@@ -1,4 +1,5 @@
 <template>
+    <div id="tab">
     <!-- TOP BAR -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <!-- dog icon-click to switch to cat map -->
@@ -58,6 +59,7 @@
                 <img loading="auto" src="/media/map.png" width="800">
             </div>
         </div>
+    </div>
     </div>
 
 
