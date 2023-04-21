@@ -4,9 +4,9 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
 import json
 
-from .models import Index, DogsMap, CatsMap
+from .models import Pet
 
-from users.models import User
+from users.models import CustomUser
 
 
 def newdog_api(request):

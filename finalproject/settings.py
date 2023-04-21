@@ -76,7 +76,7 @@ TEMPLATES = [
 
 # AUTH_USER_MODEL = 'petapp.User'
 
-WSGI_APPLICATION = "petapp.wsgi.application"
+WSGI_APPLICATION = "finalproject.wsgi.application"
 
 
 # Database
