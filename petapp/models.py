@@ -1,52 +1,31 @@
 from django.conf import settings
 
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth import get_user_model
+
+CustomUser = get_user_model()
 
 # from users.models import CustomUser
 
-from users.models import CustomUser
-
-
-# GENDER_CHOICES=(
-#     ('female'),
-#     ('male'),
-#     ('unknown'),
-# )
-
-# class User(AbstractUser):
-#     profile_image=models.ImageField(default='default.jpg', upload_to='profile_images/')
-#     date_of_birth=models.DateField(null=True)
-
-#     def __str__(self):
-#         """
-#         Display the object name when printing the object
-#         """
-#         return self.username
-
-#     def to_dict(self):
-#         """
-#         Use this to return a dictionary of the User object
-#         """
-#         return{
-#             'id': self.id,
-#             'date_of_birth': self.date_of_birth,
-#             'username' : self.username,
-#             'email' : self.email,
-#             'profile_image' : self.profile_image.url,
-#         }
+from django.utils import timezone
 
 class Pet(models.Model):
+    GENDER_CHOICES = [
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+    ]
+
     picture=models.ImageField(upload_to='pet_images', blank=True, null=True)
-    age=models.IntegerField()
-    name=models.CharField(max_length=200)
-    location=models.CharField(max_length=200)
-    color=models.CharField(max_length=50)
-    description=models.CharField(max_length=1000)
-    date=models.DateField(null=True)
-    breed=models.CharField(max_length=200)
-    # gender=models.CharField(max_length=3, choices=GENDER_CHOICES, default='unknown')
-    username=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    age=models.IntegerField(default=0)
+    name=models.CharField(max_length=200, default=' ')
+    location=models.CharField(max_length=200, default=' ')
+    color=models.CharField(max_length=50, default=' ')
+    description=models.TextField(max_length=1000, default=' ')
+    date=models.DateTimeField(default=timezone.now)
+    breed=models.CharField(max_length=200, default=' ')
+    gender=models.CharField(max_length=1, choices=GENDER_CHOICES, default=' ')
+    username=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=' ')
 
     def __str__(self):
         """
@@ -68,6 +47,16 @@ class Pet(models.Model):
             'description': self.description,
             'date': self.date,
             'breed': self.breed,
-            # 'gender': self.gender,
+            'gender': self.gender,
             'username': self.username.id,
         }
+
+    class Meta:
+        abstract = True
+
+class Dog(Pet):
+    dog_id = models.CharField(max_length=100, primary_key=True, default=1)
+
+
+class Cat(Pet):
+    cat_id = models.CharField(max_length=100, primary_key=True, default=1)

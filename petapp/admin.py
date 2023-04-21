@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import Pet
+from .models import Cat, Dog
 
 from users.models import CustomUser
 
@@ -13,4 +13,5 @@ if admin.site.is_registered(CustomUser):
     admin.site.unregister(CustomUser)
 
 admin.site.register(CustomUser)
-admin.site.register(Pet)
+admin.site.register(Cat)
+admin.site.register(Dog)

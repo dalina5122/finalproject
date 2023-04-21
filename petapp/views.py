@@ -9,7 +9,7 @@ from .models import Pet
 from users.models import CustomUser
 
 
-def newdog_api(request):
+def newpet_api(request):
     if request.method == "GET":
         return JsonResponse({
             'pets': [
@@ -28,6 +28,7 @@ def newdog_api(request):
             description=request.POST.get('description'),
             date=request.POST.get('date'),
             breed=request.POST.get('breed'),
+            gender=request.POST.get('gender'),
             user=owner
         )
         return JsonResponse(pet.to_dict())
