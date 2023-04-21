@@ -7,15 +7,16 @@
             <h1>HOME PAGE</h1>
         </div>
 
-        <button
-            v-for="tab in tabs"
-            :key="tab"
-            :class="['tab-button', { active: currentTab === tab }]"
-            @click="currentTab=tab">
-            {{ tab }}
-        </button>
+        <div>
+            <div class="tab-buttons">
+                <button v-for="(tab, index) in tabs" :key="index" @click="changeTab(tab.name)">
+                    {{ tab.name }}
+                </button>
+            </div>
 
-        <component :is="currentTab.component" class="tab"></component>
+            <component v-if="currentComponent === 'DogsMap'" is="DogsMap"></component>
+
+        </div>
 </template>
 
 <script>
@@ -28,26 +29,17 @@
 
         data(){
             return{
-                currentTab: {
-                    name: 'Index',
-                    component: null
-                },
+                currentComponent:  'Index',
 
                 tabs: [
-                    {name: 'DogsMap', path: '../components/DogsMap.vue'}
+                    {name: 'DogsMap', component: 'DogsMap'}
                 ]
             }
         },
 
         methods:{
-            async loadComponent(name){
-                const component = await import(this.tabs.find(tab => tab.name === name).path)
-                this.currentTab.component = component.default
-            },
-
-
-            created() {
-                this.loadComponent(this.currentTab.name)
+            changeTab(tabName){
+                this.currentComponent=tabName
             }
         }
     }

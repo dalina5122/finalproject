@@ -3,8 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 
 from .models import Pet
 
-from users.models import User
+from users.models import CustomUser
 
-
-admin.site.register(User)
+admin.site.register(CustomUser)
 admin.site.register(Pet)

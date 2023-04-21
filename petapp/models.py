@@ -1,7 +1,12 @@
+from django.conf import settings
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+# from users.models import CustomUser
+
 from users.models import CustomUser
+
 
 # GENDER_CHOICES=(
 #     ('female'),
@@ -41,7 +46,7 @@ class Pet(models.Model):
     date=models.DateField(null=True)
     breed=models.CharField(max_length=200)
     # gender=models.CharField(max_length=3, choices=GENDER_CHOICES, default='unknown')
-    user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    username=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):
         """
@@ -64,5 +69,5 @@ class Pet(models.Model):
             'date': self.date,
             'breed': self.breed,
             # 'gender': self.gender,
-            'user': self.user.id,
+            'username': self.username.id,
         }

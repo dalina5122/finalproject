@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "users.apps.UsersConfig",
     # 'petapp.apps.PetappConfig',
-    'finalproject',
+    # 'finalproject',
+    'petapp',
 ]
 
 MIDDLEWARE = [

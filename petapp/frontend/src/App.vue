@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <Index />
 </template>
 
@@ -10,9 +10,9 @@
       Index,
     }
   }
-</script>
+</script> -->
 
-<!-- <template>
+<template>
   <DogsMap />
 </template>
 
@@ -24,5 +24,5 @@
       DogsMap,
     }
   }
-</script> -->
+</script>
 
