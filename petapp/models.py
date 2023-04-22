@@ -25,7 +25,9 @@ class Pet(models.Model):
     date=models.DateTimeField(default=timezone.now)
     breed=models.CharField(max_length=200, default=' ')
     gender=models.CharField(max_length=1, choices=GENDER_CHOICES, default=' ')
-    username=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=' ')
+    # username=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    pet_ptr = models.OneToOneField('self', on_delete=models.CASCADE, parent_link=True, primary_key=True, default=None)
+
 
     def __str__(self):
         """
@@ -51,12 +53,12 @@ class Pet(models.Model):
             'username': self.username.id,
         }
 
-    class Meta:
-        abstract = True
+    # class Meta:
+    #     abstract = True
 
 class Dog(Pet):
-    dog_id = models.CharField(max_length=100, primary_key=True, default=1)
-
+    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 class Cat(Pet):
-    cat_id = models.CharField(max_length=100, primary_key=True, default=1)
+    username = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+

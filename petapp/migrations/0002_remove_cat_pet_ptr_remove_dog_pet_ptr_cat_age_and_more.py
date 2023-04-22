@@ -14,14 +14,14 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name="cat",
-            name="pet_ptr",
-        ),
-        migrations.RemoveField(
-            model_name="dog",
-            name="pet_ptr",
-        ),
+        # migrations.RemoveField(
+        #     model_name="cat",
+        #     name="pet_ptr",
+        # ),
+        # migrations.RemoveField(
+        #     model_name="dog",
+        #     name="pet_ptr",
+        # ),
         migrations.AddField(
             model_name="cat",
             name="age",
