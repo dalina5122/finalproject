@@ -1,12 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse, HttpRequest, HttpResponseBadRequest
-from django.shortcuts import redirect
-from django.shortcuts import get_object_or_404
 import json
-
 from .models import Cat, Dog
-
 from users.models import CustomUser
+from users.forms import SignUpForm
+
+from django_render import render_to_string
 
 
 def newdog_api(request):
@@ -32,3 +31,9 @@ def newdog_api(request):
             user=owner
         )
         return JsonResponse(dog.to_dict())
+
+# SIGN UP
+def signup(request):
+    # return render(request, 'signup.html')
+    html=render_to_string('signup.html')
+    return JsonResponse('html', html)
