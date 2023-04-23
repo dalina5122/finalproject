@@ -5,8 +5,6 @@ from .models import Cat, Dog
 from users.models import CustomUser
 from users.forms import SignUpForm
 
-from django_render import render_to_string
-
 
 def newdog_api(request):
     if request.method == "GET":
@@ -32,8 +30,7 @@ def newdog_api(request):
         )
         return JsonResponse(dog.to_dict())
 
-# SIGN UP
 def signup(request):
-    # return render(request, 'signup.html')
-    html=render_to_string('signup.html')
-    return JsonResponse('html', html)
+    return render(request, 'signup.html')
+
+
