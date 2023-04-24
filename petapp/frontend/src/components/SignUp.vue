@@ -1,72 +1,64 @@
 <template>
-    <div>
-      <form>
-        <label>Username</label>
-        <input type="text" v-model="form.username">
-        <label>Email</label>
-        <input type="email" v-model="form.email">
-        <label>Date of Birth</label>
-        <input type="date" v-model="form.date_of_birth">
-        <label>Profile Image</label>
-        <input type="file" v-on:change="handleFileChange">
-        <label>Password</label>
-        <input type="password" v-model="form.password1">
-        <label>Confirm Password</label>
-        <input type="password" v-model="form.password2">
-        <button type="button" v-on:click="submitForm">Sign Up</button>
-      </form>
-    </div>
+  <div>
+    <h2>Sign up</h2>
+    <form @submit.prevent="submitForm" enctype="multipart/form-data">
+      <input type="text" v-model="username" placeholder="Username" required>
+      <input type="email" v-model="email" placeholder="Email" required>
+      <input type="date" v-model="date_of_birth" placeholder="Date of Birth" required>
+      <input type="file" v-on:change="onFileChange" ref="fileInput">
+      <input type="password" v-model="password1" placeholder="Password" required>
+      <input type="password" v-model="password2" placeholder="Confirm Password" required>
+      <button type="submit">Sign up</button>
+    </form>
+  </div>
 </template>
-  
+
 <script>
-  export default {
-    props: ['csrfToken'],
-    data() {
-      return {
-        form: {
-          username: '',
-          email: '',
-          date_of_birth: '',
-          profile_image: null,
-          password1: '',
-          password2: ''
-        }
-      }
+import axios from 'axios';
+
+const csrftoken = getCookie('csrftoken'); // Read the CSRF token from the cookie
+
+axios.defaults.headers.common['X-CSRFToken'] = csrftoken; // Set the CSRF token in the headers of all axios requests
+
+function getCookie(name) { // Function to read cookies
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+export default {
+  data() {
+    return {
+      username: '',
+      email: '',
+      date_of_birth: '',
+      profile_image: null,
+      password1: '',
+      password2: '',
+    }
+  },
+  methods: {
+    onFileChange(event) {
+      this.profile_image = event.target.files[0];
     },
 
-    methods: {
-        handleFileChange(event) {
-            this.form.profile_image = event.target.files[0];
-        },
+    submitForm() {
+      const data = new FormData();
+      data.append('username', this.username);
+      data.append('email', this.email);
+      data.append('date_of_birth', this.date_of_birth);
+      data.append('profile_image', this.profile_image);
+      data.append('password1', this.password1);
+      data.append('password2', this.password2);
 
-        submitForm() {
-            const formData = new FormData();
-            formData.append('username', this.form.username);
-            formData.append('email', this.form.email);
-            formData.append('date_of_birth', this.form.date_of_birth);
-            formData.append('profile_image', this.form.profile_image);
-            formData.append('password1', this.form.password1);
-            formData.append('password2', this.form.password2);
-
-            fetch('/petapp/getsignup/', {
-                method: 'POST',
-                headers: {
-                  'X-CSRFToken': this.csrfToken, // Replace with your CSRF token
-                },
-                body: formData,
-            })
-
-            .then(response => response.json())
-
-            .then(data => {
-                this.form.username = data.username;
-                this.form.email = data.email;
-                this.form.date_of_birth = data.date_of_birth;
-                this.form.password1 = data.password1;
-                this.form.password2 = data.password2;
-            })
-            // .catch(error => console.error(error));
-        }
+      axios.post('http://localhost:8000/signup/', data)
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.log(error.response.data);
+        });
     }
   }
+}
 </script>
