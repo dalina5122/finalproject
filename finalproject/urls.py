@@ -18,8 +18,14 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
+from django.views.generic.base import TemplateView
+
+from . import views
+
+from users.views import signup, get_signup
 
 urlpatterns = [
     # path('petapp/', include('petapp.urls')),
+    path('signup/', signup, name='signup'),
     path("admin/", admin.site.urls),
 ]

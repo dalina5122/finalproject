@@ -30,7 +30,6 @@ def newdog_api(request):
         )
         return JsonResponse(dog.to_dict())
 
-def signup(request):
-    return render(request, 'signup.html')
+
 
 
