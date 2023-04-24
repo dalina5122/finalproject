@@ -48,7 +48,7 @@
             formData.append('password1', this.form.password1);
             formData.append('password2', this.form.password2);
 
-            fetch('http://127.0.0.1:8000/signup/', {
+            fetch('/petapp/getsignup/', {
                 method: 'POST',
                 headers: {
                   'X-CSRFToken': this.csrfToken, // Replace with your CSRF token

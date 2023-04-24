@@ -25,7 +25,6 @@ from . import views
 from users.views import signup, get_signup
 
 urlpatterns = [
-    # path('petapp/', include('petapp.urls')),
-    path('signup/', signup, name='signup'),
+    path('petapp/', include('petapp.urls')),
     path("admin/", admin.site.urls),
 ]
