@@ -22,6 +22,7 @@
 
             <component v-if="currentComponent === 'SignUp'" is="SignUp"></component>
             <component v-if="currentComponent === 'DogsMap'" is="DogsMap"></component>
+            <component v-if="currentComponent === 'LogIn'" is="LogIn"></component>
 
         </div>
 </template>
@@ -29,11 +30,13 @@
 <script>
     import DogsMap from '../components/DogsMap.vue'
     import SignUp from '../components/SignUp.vue'
+    import LogIn from '../components/LogIn.vue'
 
     export default{
         components:{
             DogsMap,
-            SignUp
+            SignUp,
+            LogIn
         },
 
         data(){
@@ -42,7 +45,8 @@
 
                 tabs: [
                     {name: 'SignUp', component: 'SignUp'},
-                    {name: 'DogsMap', component: 'DogsMap'}
+                    {name: 'DogsMap', component: 'DogsMap'},
+                    {name: 'LogIn', component: 'LogIn'}
                 ]
             }
         },

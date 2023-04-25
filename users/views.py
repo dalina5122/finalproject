@@ -4,18 +4,11 @@ from django.http import JsonResponse
 
 from django.views.decorators.csrf import csrf_exempt
 
+from django.contrib.auth import authenticate, login
+
 
 @csrf_exempt
 def signup(request):
-    # if request.method == 'POST':
-    #     form = SignUpForm(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('home')
-    # else:
-    #     form = SignUpForm()
-    # return render(request, 'signup.html', {'form': form})
-
     if request.method == 'POST':
         form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
@@ -28,9 +21,16 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
-# def csrf_middleware(get_response):
-#     def middleware(request):
-#         response = get_response(request)
-#         response["X-CSRFToken"] = request.COOKIES.get("csrftoken")
-#         return response
-#     return middleware
+@csrf_exempt
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            user_data = user.to_dict()
+            return JsonResponse({'success': True, 'user': user_data})
+        else:
+            return JsonResponse({'success': False, 'error': 'Invalid credentials'})
+
