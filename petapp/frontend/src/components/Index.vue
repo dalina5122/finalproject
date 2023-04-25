@@ -15,14 +15,11 @@
         <!-- BUTTON FOR DOG MAP -->
         <div>
             <div class="tab-buttons">
-                <button v-for="(tab, index) in tabs" :key="index" @click="changeTab(tab.name)">
-                    {{ tab.name }}
-                </button>
+                <router-link to="/">SignUp</router-link>
+                <router-link to="/dogs-map">DogsMap</router-link>
+                <router-link to="/log-in">LogIn</router-link>
             </div>
-
-            <component v-if="currentComponent === 'SignUp'" is="SignUp"></component>
-            <component v-if="currentComponent === 'DogsMap'" is="DogsMap"></component>
-            <component v-if="currentComponent === 'LogIn'" is="LogIn"></component>
+            <router-view></router-view>
 
         </div>
 </template>
@@ -52,8 +49,8 @@
         },
 
         methods:{
-            changeTab(tabName){
-                this.currentComponent=tabName
+            changeTab(tabName) {
+                this.$router.push('/' + tabName.toLowerCase())
             }
         }
     }
