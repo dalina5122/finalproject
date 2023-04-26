@@ -1,20 +1,12 @@
 <template>
   <div>
-    <Layout>
-      <Index />
-    </Layout>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import Layout from './components/Layout.vue'
-  import Index from './components/Index.vue'
-
-  export default{
-    components:{
-      Layout,
-      Index
-    }
+  export default {
+    name: 'App'
   }
 </script>
 

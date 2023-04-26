@@ -1,10 +1,12 @@
 <template>
-    <header>
+    <div>
+      <header>
         <div>
-            <img loading="auto" src="/media/oscar6.png" width="200">
+          <img loading="auto" src="/media/oscar6.png" width="200">
         </div>
-    </header>
-
-    <main>
-    </main>
-</template>
+      </header>
+      <main>
+        <router-view></router-view>
+      </main>
+    </div>
+  </template>
