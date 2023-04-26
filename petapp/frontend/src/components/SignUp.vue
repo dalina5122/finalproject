@@ -16,15 +16,7 @@
 <script>
 import axios from 'axios';
 
-const csrftoken = getCookie('csrftoken'); // Read the CSRF token from the cookie
 
-axios.defaults.headers.common['X-CSRFToken'] = csrftoken; // Set the CSRF token in the headers of all axios requests
-
-function getCookie(name) { // Function to read cookies
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
 
 export default {
   data() {

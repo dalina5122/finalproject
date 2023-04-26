@@ -1,13 +1,19 @@
 <template>
-  <Index />
+  <div>
+    <Layout>
+      <Index />
+    </Layout>
+  </div>
 </template>
 
 <script>
+  import Layout from './components/Layout.vue'
   import Index from './components/Index.vue'
 
   export default{
     components:{
-      Index,
+      Layout,
+      Index
     }
   }
 </script>

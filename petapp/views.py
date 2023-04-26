@@ -5,6 +5,8 @@ from .models import Cat, Dog
 from users.models import CustomUser
 from users.forms import SignUpForm
 
+def index(request):
+    return render(request, "frontend/index.html", {})
 
 def newdog_api(request):
     if request.method == "GET":

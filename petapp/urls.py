@@ -9,6 +9,7 @@ from django.contrib import admin
 
 
 urlpatterns = [
+    path('', views.index, name='index'),
     path('signup/', signup, name='signup'),
     path('login/', login, name='login'),
     path("admin/", admin.site.urls),

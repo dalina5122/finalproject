@@ -10,17 +10,23 @@ import { createRouter, createWebHistory } from 'vue-router'
 import DogsMap from './components/DogsMap.vue'
 import SignUp from './components/SignUp.vue'
 import LogIn from './components/LogIn.vue'
+import Layout from './components/Layout.vue'
+import Index from './components/Index.vue'
 
+const routes=[
+  {path: '/', component: Layout, children:[
+    {path: '/', component: Index},
+    {path: '/signup', component: SignUp},
+    {path: '/dogs-map', component: DogsMap},
+    {path: '/log-in', component: LogIn}
+  ]}
 
-// createApp(App).mount('#app')
+]
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes: [
-      { path: '/', component: SignUp },
-      { path: '/dogs-map', component: DogsMap },
-      { path: '/log-in', component: LogIn }
-    ]
-  })
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes
+})
+export default router
   
-  createApp(App).use(router).mount('#app')
+createApp(App).use(router).mount('#app')
