@@ -1,13 +1,13 @@
 <template>
-    <!-- <form @submit.prevent="login">
+    <form @submit.prevent="login($event)" enctype="multipart/form-data">
       <input type="text" v-model="username" required>
       <input type="password" v-model="password" required>
       <button type="submit">Login</button>
-    </form> -->
+    </form>
     <h1>LOGIN</h1>
 </template>
   
-<!-- <script>
+<script>
   import axios from 'axios';
   
   export default {
@@ -18,22 +18,21 @@
       };
     },
     methods: {
-       login() {
-            const data = new FormData();
-            data.append('username', this.username);
-            data.append('password', this.password);
+      login(event) {
+        event.preventDefault();
+        const data = new FormData();
+        data.append('username', this.username);
+        data.append('password', this.password);
 
-            axios.post('http://localhost:8000/login/', data)
-            .then(response => {
-                console.log(response.data);
-                // Redirect the user to the main page or do whatever you need to do with the user data
-            })
-
-            .catch(error => {
-                console.log(error.response.data);
-            });
-        }
+        axios.post('http://localhost:8000/login/', data)
+          .then(response => {
+            console.log(response.data);
+            this.$router.push('/dogs-map');
+          })
+          .catch(error => {
+            console.log(error.response.data);
+          });
       }
-    
   }
-</script> -->
+  }
+</script>

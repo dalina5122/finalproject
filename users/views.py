@@ -22,7 +22,7 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 @csrf_exempt
-def login(request):
+def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -33,4 +33,6 @@ def login(request):
             return JsonResponse({'success': True, 'user': user_data})
         else:
             return JsonResponse({'success': False, 'error': 'Invalid credentials'})
+    else:
+        return render(request, 'login.html')
 

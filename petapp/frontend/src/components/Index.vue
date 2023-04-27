@@ -15,16 +15,7 @@
   </template>
 
 <script>
-// import DogsMap from '../components/DogsMap.vue'
-// import SignUp from '../components/SignUp.vue'
-// import LogIn from '../components/LogIn.vue'
-// export default {
-//   components: {
-//     DogsMap,
-//     SignUp,
-//     LogIn
-//   }
-// }
+
 </script>
 
 
