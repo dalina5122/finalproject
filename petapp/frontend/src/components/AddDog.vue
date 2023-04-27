@@ -5,12 +5,25 @@
             <input type="text" v-model="name_d" placeholder="Name" required>
             <input type="number" v-model="age_d" placeholder="Age" required>
             <input type="date" v-model="date_d" placeholder="Date" required>
-            <input type="text" v-model="county_d" placeholder="County" required>
+            <select v-model="county_d" required>
+                <option v-for="option in countyOptions" :value="option">
+                    {{ option }}
+                </option>
+            </select>
             <input type="text" v-model="color_d" placeholder="Color" required>
             <input type="text" v-model="description_d" placeholder="Description" required>
             <input type="text" v-model="breed_d" placeholder="Breed" required>
-            <input type="text" v-model="gender_d" placeholder="Gender" required>
-            <input type="text" v-model="status_d" placeholder="Status" required>
+            <select v-model="gender_d" required>
+                <option v-for="option in genderOptions" :value="option">
+                    {{ option }}
+                </option>
+            </select>            
+            <select v-model="status_d" required>
+                <option v-for="option in statusOptions" :value="option">
+                    {{ option }}
+                </option>
+            </select>  
+
             <button class='btn btn-outline-success my-2 my-sm-0' type="submit">Post</button>
         </form>
     </div>
@@ -31,7 +44,15 @@ export default {
         date_d: '',
         breed_d: '',
         gender_d: '',
-        status_d: ','
+        status_d: ',',
+        countyOptions: [('AB', 'Alba'), ('AR', 'Arad'), ('AG', 'Arges'), ('BC', 'Bacau'), ('BH', 'Bihor'), ('BN', 'Bistrita-Nasaud'), ('BT', 'Botosani'),
+        ('BV', 'Brasov'), ('BR', 'Braila'), ('BZ', 'Buzau'), ('CS', 'Caras-Severin'), ('CL', 'Calarasi'), ('CJ', 'Cluj'),
+        ('CT', 'Constanta'), ('CV', 'Covasna'), ('DB', 'Dambovita'), ('DJ', 'Dolj'), ('GL', 'Galati'), ('GR', 'Giurgiu'), ('GJ', 'Gorj'),
+        ('HR', 'Harghita'), ('HD', 'Hunedoara'), ('IL', 'Ialomita'), ('IS', 'Iasi'), ('MM', 'Maramures'), ('MH', 'Mehedinti'), ('MS', 'Mures'),
+        ('OT', 'Olt'), ('PH', 'Prahova'), ('SM', 'Satu Mare'), ('SJ', 'Salaj'), ('SB', 'Sibiu'), ('SV', 'Suceava'), ('TR', 'Teleorman'),
+        ('TM', 'Timis'), ('TL', 'Tulcea'), ('VS', 'Vaslui'), ('VL', 'Valcea'), ('VN', 'Vrancea')],
+        genderOptions: [('M', 'Male'), ('F', 'Female'), ('O', 'Other')],
+        statusOptions: [('L', 'Lost'), ('F', 'Found'), ('A', 'Adoption')],
     }
   },
   methods: {
