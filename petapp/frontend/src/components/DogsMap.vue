@@ -17,7 +17,7 @@
             <!-- POST BUTTON -->
             <div class="collapse navbar-collapse">
                 <div class="nav navbar-nav">
-                     <button class="btn btn-outline-success my-2 my-sm-0">POST</button>
+                     <button class="btn btn-outline-success my-2 my-sm-0" @click="showForm=true">NEW POST</button>
                 </div>
             </div>   
         </nav>
@@ -54,10 +54,27 @@
                 </div>
             </div>
         </div>
+
+        <div v-if="showForm">
+            <AddDog />
+        </div>
     </div>
 </template>
 
 
 <script>
-    
+    import AddDog from '../components/AddDog.vue';
+    import axios from 'axios';
+
+    export default{
+        components:{
+            AddDog
+        },
+
+        data(){
+            return{
+                showForm:false
+            }
+        }
+    }
 </script>
