@@ -10,4 +10,4 @@ class AddDog(forms.ModelForm):
 
     class Meta:
         model=Dog
-        fields= ['picture_d', 'age_d', 'name_d', 'county_d', 'color_d', 'description_d', 'date_d', 'breed_d', 'gender_d', 'status_d']
+        fields= ['id', 'picture_d', 'age_d', 'name_d', 'county_d', 'color_d', 'description_d', 'date_d', 'breed_d', 'gender_d', 'status_d']
