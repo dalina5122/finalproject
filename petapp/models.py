@@ -40,7 +40,7 @@ class Dog(models.Model):
     gender_d=models.CharField(max_length=1, choices=GENDER_CHOICES_D, default=' ')
     status_d=models.CharField(max_length=8, choices=STATUS_D, default=' ')
     username=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
-    id=models.AutoField(primary_key=True, default=1)
+    id=models.AutoField(primary_key=True)
 
     def __str__(self):
         """
