@@ -39,7 +39,7 @@ class Dog(models.Model):
     breed_d=models.CharField(max_length=200, default=' ')
     gender_d=models.CharField(max_length=1, choices=GENDER_CHOICES_D, default=' ')
     status_d=models.CharField(max_length=8, choices=STATUS_D, default=' ')
-    username=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
+    owner=models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='dogs_owned', default=settings.AUTH_USER_MODEL)
     id=models.AutoField(primary_key=True)
 
     def __str__(self):
@@ -64,7 +64,7 @@ class Dog(models.Model):
             'breed_d': self.breed_d,
             'gender_d': self.gender_d,
             'status_d': self.status_d,
-            'username': self.username.id,
+            'owner': self.owner.id,
         }
 
 class Cat(models.Model):

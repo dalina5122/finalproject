@@ -20,6 +20,7 @@ def newdog(request):
             dog=form.save(commit=False)
             dog.owner=request.user.username
             dog.save()
+            return redirect('newdog')
 
     else:
         form=AddDog()

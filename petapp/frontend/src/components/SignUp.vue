@@ -44,6 +44,7 @@ export default {
       axios.post('http://localhost:8000/signup/', data)
         .then(response => {
           console.log(response.data);
+          this.$router.push('/newdog');
         })
         .catch(error => {
           console.log(error.response.data);

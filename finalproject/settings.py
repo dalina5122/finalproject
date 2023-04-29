@@ -39,11 +39,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "users.apps.UsersConfig",
     # 'petapp.apps.PetappConfig',
     # 'finalproject',
     'petapp',
     'corsheaders',
+    'users',
 ]
 
 MIDDLEWARE = [

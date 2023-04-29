@@ -73,25 +73,28 @@ export default {
       data.append('date_d', this.date_d);
       data.append('breed_d', this.breed_d);
       data.append('gender_d', this.gender_d);
-      data.append('status_d', this.status_d)
+      data.append('status_d', this.status_d);
 
       axios.post('http://localhost:8000/newdog/', data)
         .then(response => {
-          const newDogId = response.data.id;
-          console.log(`New dog created with ID: ${newDogId}`);
+          // const newDogId = response.data.id;
+          // console.log(`New dog created with ID: ${newDogId}`);
           
-          this.age_d = '';
-          this.name_d = '';
-          this.picture_d = null;
-          this.county_d = '';
-          this.color_d = '';
-          this.description_d = '';
-          this.date_d = '';
-          this.breed_d = '';
-          this.gender_d = '';
-          this.status_d = '';
+          // this.age_d = '';
+          // this.name_d = '';
+          // this.picture_d = null;
+          // this.county_d = '';
+          // this.color_d = '';
+          // this.description_d = '';
+          // this.date_d = '';
+          // this.breed_d = '';
+          // this.gender_d = '';
+          // this.status_d = '';
 
+
+          console.log(response);
           alert('Dog created successfully!');
+          this.$router.push('/newdog');
         })
         .catch(error => {
           console.log(error.response.data);

@@ -27,7 +27,7 @@
         axios.post('http://localhost:8000/login/', data)
           .then(response => {
             console.log(response.data);
-            this.$router.push('/dogs-map');
+            this.$router.push('/newdog');
           })
           .catch(error => {
             console.log(error.response.data);
