@@ -18,7 +18,7 @@ def newdog(request):
         form = AddDog(request.POST, request.FILES)
         if form.is_valid():
             dog=form.save(commit=False)
-            dog.owner=request.user.username
+            dog.owner=request.user
             dog.save()
             return redirect('newdog')
 

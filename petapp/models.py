@@ -2,8 +2,9 @@ from django.conf import settings
 
 from django.db import models
 
-from django.contrib.auth import get_user_model
-CustomUser = get_user_model()
+# from django.contrib.auth import get_user_model
+# CustomUser = get_user_model()
+CustomUser=settings.AUTH_USER_MODEL
 
 from django.utils import timezone
 
@@ -39,8 +40,7 @@ class Dog(models.Model):
     breed_d=models.CharField(max_length=200, default=' ')
     gender_d=models.CharField(max_length=1, choices=GENDER_CHOICES_D, default=' ')
     status_d=models.CharField(max_length=8, choices=STATUS_D, default=' ')
-    owner=models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='dogs_owned', default=settings.AUTH_USER_MODEL)
-    id=models.AutoField(primary_key=True)
+    owner=models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='dogs_owned', null=True)
 
     def __str__(self):
         """
@@ -52,8 +52,8 @@ class Dog(models.Model):
         """
         Use this to return a dictionary of the Answer object
         """
+        owner_id = self.owner.id if self.owner else None
         return{
-            'id': self.id,
             'picture_d': self.picture_d.url,
             'age_d': self.age_d,
             'name_d': self.name_d,
@@ -64,7 +64,7 @@ class Dog(models.Model):
             'breed_d': self.breed_d,
             'gender_d': self.gender_d,
             'status_d': self.status_d,
-            'owner': self.owner.id,
+            'owner': owner_id,
         }
 
 class Cat(models.Model):

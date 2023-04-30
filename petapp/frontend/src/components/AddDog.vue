@@ -77,21 +77,6 @@ export default {
 
       axios.post('http://localhost:8000/newdog/', data)
         .then(response => {
-          // const newDogId = response.data.id;
-          // console.log(`New dog created with ID: ${newDogId}`);
-          
-          // this.age_d = '';
-          // this.name_d = '';
-          // this.picture_d = null;
-          // this.county_d = '';
-          // this.color_d = '';
-          // this.description_d = '';
-          // this.date_d = '';
-          // this.breed_d = '';
-          // this.gender_d = '';
-          // this.status_d = '';
-
-
           console.log(response);
           alert('Dog created successfully!');
           this.$router.push('/newdog');
