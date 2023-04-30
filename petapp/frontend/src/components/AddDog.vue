@@ -48,13 +48,14 @@ export default {
         status_d: '',
         countyOptions: [{value: 'AB', label: 'Alba'}, {value: 'AR', label: 'Arad'}, {value: 'AG', label: 'Arges'}, {value:'BC', label: 'Bacau'}, {value: 'BH', label: 'Bihor'}, {value: 'BN', label:'Bistrita-Nasaud'}, {value: 'BT', label: 'Botosani'},
         {value: 'BV', label: 'Brasov'}, {value: 'BR', label: 'Braila'}, {value: 'BZ', label: 'Buzau'}, {value: 'CS', label: 'Caras-Severin'}, {value: 'CL', label: 'Calarasi'}, {value: 'CJ', label: 'Cluj'},
-        {valu: 'CT', label: 'Constanta'}, {value: 'CV', label: 'Covasna'}, {value: 'DB', label: 'Dambovita'}, {value: 'DJ', label: 'Dolj'}, {value: 'GL', label: 'Galati'}, {value: 'GR', label: 'Giurgiu'}, {value: 'GJ', label: 'Gorj'},
+        {value: 'CT', label: 'Constanta'}, {value: 'CV', label: 'Covasna'}, {value: 'DB', label: 'Dambovita'}, {value: 'DJ', label: 'Dolj'}, {value: 'GL', label: 'Galati'}, {value: 'GR', label: 'Giurgiu'}, {value: 'GJ', label: 'Gorj'},
         {value: 'HR', label: 'Harghita'}, {value: 'HD', label: 'Hunedoara'}, {value: 'IL', label: 'Ialomita'}, {value: 'IS', label: 'Iasi'}, {value: 'MM', label: 'Maramures'}, {value: 'MH', label: 'Mehedinti'}, {value: 'MS', label: 'Mures'},
         {value: 'OT', label: 'Olt'}, {value: 'PH', label: 'Prahova'}, {calue: 'SM', label: 'Satu Mare'}, {value: 'SJ', label: 'Salaj'}, {value: 'SB', label: 'Sibiu'}, {value: 'SV', label: 'Suceava'}, {value: 'TR', label: 'Teleorman'},
         {value: 'TM', label: 'Timis'}, {value: 'TL', label: 'Tulcea'}, {value: 'VS', label: 'Vaslui'}, {value: 'VL', label: 'Valcea'}, {value: 'VN', label: 'Vrancea'}],
         genderOptions: [{value: 'M', label: 'Male'}, {value:'F', label: 'Female'}, {value:'O', label: 'Other'}],
         statusOptions: [{value: 'L', label:'Lost'}, {value: 'F', label: 'Found'}, {value:'A', label: 'Adoption'}],
-    }
+        userId: '',
+      }
   },
 
   methods: {

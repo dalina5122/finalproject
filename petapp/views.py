@@ -14,17 +14,35 @@ def index(request):
 @login_required
 @csrf_exempt
 def newdog(request):
+    user_id = request.user.id
+    user = CustomUser.objects.get(id=user_id)
+
     if request.method=='POST':
-        form = AddDog(request.POST, request.FILES)
+        form=AddDog(request.POST, request.FILES)
         if form.is_valid():
-            dog=form.save(commit=False)
-            dog.owner=request.user
+            dog=form.save(commit=False, owner=user)
             dog.save()
             return redirect('newdog')
+        else:
+            print(form.errors)
 
-    else:
+    else: 
         form=AddDog()
-    return render(request, 'adddog.html', {'form': form})
+        return render(request, 'adddog.html', {'form': form})
+
+
+
+    # if request.method=='POST':
+    #     form = AddDog(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         dog=form.save(commit=False)
+    #         dog.owner=request.user
+    #         dog.save()
+    #         return redirect('newdog')
+
+    # else:
+    #     form=AddDog()
+    # return render(request, 'adddog.html', {'form': form})
 
 
 
