@@ -14,21 +14,50 @@ def index(request):
 @login_required
 @csrf_exempt
 def newdog(request):
-    user_id = request.user.id
-    user = CustomUser.objects.get(id=user_id)
+    if request.method=='GET':
+        return JsonResponse({
+            'dogs': [
+                dog.to_dict()
+                for dog in Dogs.objects.all()
+            ]
+        })
 
-    if request.method=='POST':
-        form=AddDog(request.POST, request.FILES)
-        if form.is_valid():
-            dog=form.save(commit=False, owner=user)
-            dog.save()
-            return redirect('newdog')
-        else:
-            print(form.errors)
+    if request.methid=='POST':
+        print('in post')
+        print(request.user)
+        print(request.FILES)
+        user=get_object_or_404(CustomUser, id=request.owner.id)
 
-    else: 
-        form=AddDog()
-        return render(request, 'adddog.html', {'form': form})
+        dog=Dogs.objects.create(
+            name_d=request.POST.get('name_d'),
+            age_d=request.POST.get('age_d'),
+            county_d=request.POST.get('county_d'),
+            color_d=request.POST.get('color_d'),
+            description_d=request.POST.get('description_d'),
+            date_d=request.POST.get('date_d'),
+            breed_d=request.POST.get('breed_d'),
+            gender_d=request.POST.get('gender_d'),
+            status_d=request.POST.get('status_d'),
+            picture_d=request.FILES.get('picture_d'),
+            owner=user
+        )
+        return JsonResponse(dog.to_dict())
+
+    # user_id = request.user.id
+    # user = CustomUser.objects.get(id=user_id)
+
+    # if request.method=='POST':
+    #     form=AddDog(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         dog=form.save(commit=False, owner=user)
+    #         dog.save()
+    #         return redirect('newdog')
+    #     else:
+    #         print(form.errors)
+
+    # else: 
+    #     form=AddDog()
+    #     return render(request, 'adddog.html', {'form': form})
 
 
 

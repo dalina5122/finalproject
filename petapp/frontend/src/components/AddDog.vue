@@ -1,25 +1,25 @@
 <template>
     <div>
-        <form @submit.prevent="submitForm" enctype="multipart/form-data">
-            <input type="file" v-on:change="onFileChange" ref="fileInput">
-            <input type="text" v-model="name_d" placeholder="Name" required>
-            <input type="number" v-model="age_d" placeholder="Age" required>
-            <input type="date" v-model="date_d" placeholder="Date" required>
-            <select v-model="county_d" required>
+        <form @submit="postDog" enctype="multipart/form-data">
+            <input type="file" id="picture_d2" required>
+            <input type="text" id="name_d2" placeholder="Name" required>
+            <input type="number" id="age_d2" placeholder="Age" required>
+            <input type="date" id="date_d2" placeholder="Date" required>
+            <select id="county_d2" required>
                 <option disabled value="Select a County"></option>
                 <option v-for="option in countyOptions" :value="option.value">
                     {{ option.label }}
                 </option>
             </select>
-            <input type="text" v-model="color_d" placeholder="Color" required>
-            <input type="text" v-model="description_d" placeholder="Description" required>
-            <input type="text" v-model="breed_d" placeholder="Breed" required>
-            <select v-model="gender_d" required>
+            <input type="text" id="color_d2" placeholder="Color" required>
+            <input type="text" id="description_d2" placeholder="Description" required>
+            <input type="text" id="breed_d2" placeholder="Breed" required>
+            <select id="gender_d2" required>
                 <option v-for="option in genderOptions" :value="option.value">
                     {{ option.label }}
                 </option>
             </select>            
-            <select v-model="status_d" required>
+            <select id="status_d2" required>
                 <option v-for="option in statusOptions" :value="option.value">
                     {{ option.label }}
                 </option>
@@ -31,21 +31,11 @@
 </template>
 
 <script>
-import axios from 'axios';
+  import {defineComponent} from 'vue';
 
-export default {
-  data() {
+  export default defineComponent({
+    data() {
     return {
-        age_d: '',
-        name_d: '',
-        picture_d: null,
-        county_d: '',
-        color_d: '',
-        description_d: '',
-        date_d: '',
-        breed_d: '',
-        gender_d: '',
-        status_d: '',
         countyOptions: [{value: 'AB', label: 'Alba'}, {value: 'AR', label: 'Arad'}, {value: 'AG', label: 'Arges'}, {value:'BC', label: 'Bacau'}, {value: 'BH', label: 'Bihor'}, {value: 'BN', label:'Bistrita-Nasaud'}, {value: 'BT', label: 'Botosani'},
         {value: 'BV', label: 'Brasov'}, {value: 'BR', label: 'Braila'}, {value: 'BZ', label: 'Buzau'}, {value: 'CS', label: 'Caras-Severin'}, {value: 'CL', label: 'Calarasi'}, {value: 'CJ', label: 'Cluj'},
         {value: 'CT', label: 'Constanta'}, {value: 'CV', label: 'Covasna'}, {value: 'DB', label: 'Dambovita'}, {value: 'DJ', label: 'Dolj'}, {value: 'GL', label: 'Galati'}, {value: 'GR', label: 'Giurgiu'}, {value: 'GJ', label: 'Gorj'},
@@ -54,39 +44,77 @@ export default {
         {value: 'TM', label: 'Timis'}, {value: 'TL', label: 'Tulcea'}, {value: 'VS', label: 'Vaslui'}, {value: 'VL', label: 'Valcea'}, {value: 'VN', label: 'Vrancea'}],
         genderOptions: [{value: 'M', label: 'Male'}, {value:'F', label: 'Female'}, {value:'O', label: 'Other'}],
         statusOptions: [{value: 'L', label:'Lost'}, {value: 'F', label: 'Found'}, {value:'A', label: 'Adoption'}],
-        userId: '',
       }
-  },
-
-  methods: {
-    onFileChange(event) {
-      this.picture_d = event.target.files[0];
     },
 
-    submitForm() {
-      const data = new FormData();
-      data.append('age_d', this.age_d);
-      data.append('name_d', this.name_d);
-      data.append('county_d', this.county_d);
-      data.append('picture_d', this.picture_d);
-      data.append('color_d', this.color_d);
-      data.append('description_d', this.description_d);
-      data.append('date_d', this.date_d);
-      data.append('breed_d', this.breed_d);
-      data.append('gender_d', this.gender_d);
-      data.append('status_d', this.status_d);
+    methods:{
+      async postDog(event){
+        event.preventDefault();
+        let dogFormData=new FormData();
 
-      axios.post('http://localhost:8000/newdog/', data)
-        .then(response => {
-          console.log(response);
-          alert('Dog created successfully!');
-          this.$router.push('/newdog');
-        })
-        .catch(error => {
-          console.log(error.response.data);
-          alert('Error creating dog. Please try again later.');
+        var input=document.getElementById('picture_d2');
+        var new_picture_d=input.files[0];
+        console.log(new_picture_d)
+
+        let new_name_d=document.getElementById('name_d2').value;
+        let new_age_d=document.getElementById('age_d2').value;
+        let new_date_d=document.getElementById('date_d2').value;
+        let new_county_d=document.getElementById('county_d2').value;
+        let new_color_d=document.getElementById('color_d2').value;
+        let new_description_d=document.getElementById('description_d2').value;
+        let new_breed_d=document.getElementById('breed_d2').value;
+        let new_gender_d=document.getElementById('gender_d2').value;
+        let new_status_d=document.getElementById('status_d2').value;
+
+        let new_entry={
+          name_d: new_name_d,
+          age_d: new_age_d,
+          date_d: new_date_d,
+          county_d: new_county_d,
+          color_d: new_color_d,
+          description_d: new_description_d,
+          breed_d: new_breed_d,
+          gender_d: new_gender_d,
+          status_d: new_status_d,
+        }
+        console.log(new_entry)
+
+        dogFormData.append('age_d', new_age_d);
+        dogFormData.append('name_d', new_name_d);
+        dogFormData.append('county_d', new_county_d);
+        dogFormData.append('picture_d', new_picture_d);
+        dogFormData.append('color_d', new_color_d);
+        dogFormData.append('description_d', new_description_d);
+        dogFormData.append('date_d', new_date_d);
+        dogFormData.append('breed_d', new_breed_d);
+        dogFormData.append('gender_d', new_gender_d);
+        dogFormData.append('status_d', new_status_d);
+        console.log("this is form data")
+        console.log(dogFormData)
+        let response=await fetch("http://localhost:8000/newdog/",{
+          method: 'POST',
+          // mode: 'cors',
+          // credentials: 'include',
+          // referrerPolicy: "no-referrer",
+          body: dogFormData,
         });
+        
+        if(response.ok){
+          document.getElementById('name_d2').value="",
+          document.getElementById('age_d2').value="",
+          document.getElementById('date_d2').value="",
+          document.getElementById('county_d2').value="",
+          document.getElementById('color_d2').value="",
+          document.getElementById('description_d2').value="",
+          document.getElementById('breed_d2').value="",
+          document.getElementById('gender_d2').value="",
+          document.getElementById('status_d2').value="",
+          document.getElementById('picture_d2').value=""
+          this.$router.push('/newdog');
+        }
+        else
+          alert('Dog cannot be added');
+      }
     }
-  }
-}
+  })
 </script>

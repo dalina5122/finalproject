@@ -64,7 +64,7 @@ class Dog(models.Model):
             'breed_d': self.breed_d,
             'gender_d': self.gender_d,
             'status_d': self.status_d,
-            'owner': owner_id,
+            'owner': self.owner.id,
         }
 
 class Cat(models.Model):
