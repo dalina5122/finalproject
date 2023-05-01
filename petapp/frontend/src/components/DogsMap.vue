@@ -71,6 +71,7 @@
     export default{
         data(){
             return{
+                showForm: false,
                 dogs: [],
             }
         },
@@ -81,13 +82,15 @@
                         "Content-Type": "application/json",
                         Authorization: `Token ${localStorage.getItem("token")}`,
                 };
-                console.log("Headers:", headers);
-
                 const response=await axios.get('http://127.0.0.1:8000/petapp/getdogs/',{
                     headers: headers
                 });
 
-                this.dogs=response.data.dogs;
+                this.dogs=response.data.dogs.slice();
+                console.log('Fetched dogs:', this.dogs);
+                console.log(response.data);
+
+
             }
             catch(error){
                 console.error("Error fetching dogs: ", error);
@@ -96,12 +99,6 @@
 
         components:{
             AddDog
-        },
-
-        data(){
-            return{
-                showForm:false
-            }
         }
     }
 </script>

@@ -24,7 +24,7 @@
         data.append('username', this.username);
         data.append('password', this.password);
 
-        axios.post('http://localhost:8000/login/', data)
+        axios.post('http://localhost:8000/petapp/login/', data)
           .then(response => {
             console.log(response.data);
             const token = response.data.token;

@@ -41,10 +41,10 @@ export default {
       data.append('password1', this.password1);
       data.append('password2', this.password2);
 
-      axios.post('http://localhost:8000/signup/', data)
+      axios.post('http://localhost:8000/petapp/signup/', data)
         .then(response => {
           console.log(response.data);
-          this.$router.push('/newdog');
+          this.$router.push('/dogsmap');
         })
         .catch(error => {
           console.log(error.response.data);
