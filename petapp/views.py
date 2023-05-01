@@ -7,15 +7,20 @@ from users.forms import SignUpForm
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
+
 import base64
 from django.core.files.base import ContentFile
 
 def index(request):
     return render(request, "frontend/index.html", {})
 
-@login_required
 @csrf_exempt
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
 def newdog(request):
+    print('Token in header:', request.META.get('HTTP_AUTHORIZATION'))
     if request.method=='GET':
         return JsonResponse({
             'dogs': [
@@ -25,6 +30,7 @@ def newdog(request):
         })
 
     if request.method=='POST':
+        print("Received data:", request.body.decode('utf-8'))
         print('in post')
         print(request.user)
         print(request.FILES)
@@ -50,7 +56,7 @@ def newdog(request):
             gender_d=data.get('gender_d'),
             status_d=data.get('status_d'),
             picture_d=image_content,
-            owner=user
+            owner=owner
         )
         return JsonResponse(dog.to_dict())
 

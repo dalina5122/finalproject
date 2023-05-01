@@ -36,6 +36,7 @@
   export default defineComponent({
     data() {
     return {
+        dogs: [],
         countyOptions: [{value: 'AB', label: 'Alba'}, {value: 'AR', label: 'Arad'}, {value: 'AG', label: 'Arges'}, {value:'BC', label: 'Bacau'}, {value: 'BH', label: 'Bihor'}, {value: 'BN', label:'Bistrita-Nasaud'}, {value: 'BT', label: 'Botosani'},
         {value: 'BV', label: 'Brasov'}, {value: 'BR', label: 'Braila'}, {value: 'BZ', label: 'Buzau'}, {value: 'CS', label: 'Caras-Severin'}, {value: 'CL', label: 'Calarasi'}, {value: 'CJ', label: 'Cluj'},
         {value: 'CT', label: 'Constanta'}, {value: 'CV', label: 'Covasna'}, {value: 'DB', label: 'Dambovita'}, {value: 'DJ', label: 'Dolj'}, {value: 'GL', label: 'Galati'}, {value: 'GR', label: 'Giurgiu'}, {value: 'GJ', label: 'Gorj'},
@@ -47,7 +48,30 @@
       }
     },
 
+    created(){
+      this.fetchDogs();
+    },
+
     methods:{
+      async fetchDogs() {
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://127.0.0.1:8000/newdog/', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Token ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          this.dogs = data;        
+        } 
+        else {
+            alert('Does not work');
+        }
+      },
+
       async postDog(event){
         event.preventDefault();
         let dogFormData=new FormData();

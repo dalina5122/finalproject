@@ -27,6 +27,8 @@
         axios.post('http://localhost:8000/login/', data)
           .then(response => {
             console.log(response.data);
+            const token = response.data.token;
+            localStorage.setItem('token', token);
             this.$router.push('/newdog');
           })
           .catch(error => {
