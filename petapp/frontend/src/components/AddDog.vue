@@ -54,7 +54,16 @@
 
         var input=document.getElementById('picture_d2');
         var new_picture_d=input.files[0];
-        console.log(new_picture_d)
+
+        let new_picture_d_base64 = null;
+        if (new_picture_d) {
+          new_picture_d_base64 = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(new_picture_d);
+          });
+        }
 
         let new_name_d=document.getElementById('name_d2').value;
         let new_age_d=document.getElementById('age_d2').value;
@@ -76,24 +85,18 @@
           breed_d: new_breed_d,
           gender_d: new_gender_d,
           status_d: new_status_d,
-        }
+          picture_d: new_picture_d_base64,
+        };
         console.log(new_entry)
 
-        dogFormData.append('age_d', new_age_d);
-        dogFormData.append('name_d', new_name_d);
-        dogFormData.append('county_d', new_county_d);
-        dogFormData.append('picture_d', new_picture_d);
-        dogFormData.append('color_d', new_color_d);
-        dogFormData.append('description_d', new_description_d);
-        dogFormData.append('date_d', new_date_d);
-        dogFormData.append('breed_d', new_breed_d);
-        dogFormData.append('gender_d', new_gender_d);
-        dogFormData.append('status_d', new_status_d);
-        console.log("this is form data")
-        console.log(dogFormData)
+        console.log("Sending data:", new_entry);
         let response=await fetch('http://127.0.0.1:8000/newdog/',{
           method: 'POST',
-          body: dogFormData,
+          headers: {
+            "Authorization": `Token ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(new_entry),
         });
         
         if(response.ok){
