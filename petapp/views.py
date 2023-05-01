@@ -17,17 +17,21 @@ def index(request):
     return render(request, "frontend/index.html", {})
 
 @csrf_exempt
-@api_view(['GET', 'POST'])
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getdogs(request):
+    return JsonResponse({
+        'dogs': [
+            dog.to_dict()
+            for dog in Dog.objects.all()
+        ]
+    })
+
+@csrf_exempt
+@api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def newdog(request):
     print('Token in header:', request.META.get('HTTP_AUTHORIZATION'))
-    if request.method=='GET':
-        return JsonResponse({
-            'dogs': [
-                dog.to_dict()
-                for dog in Dog.objects.all()
-            ]
-        })
 
     if request.method=='POST':
         print("Received data:", request.body.decode('utf-8'))

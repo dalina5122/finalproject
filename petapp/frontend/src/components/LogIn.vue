@@ -29,7 +29,7 @@
             console.log(response.data);
             const token = response.data.token;
             localStorage.setItem('token', token);
-            this.$router.push('/newdog');
+            this.$router.push('/dogsmap');
           })
           .catch(error => {
             console.log(error.response.data);

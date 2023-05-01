@@ -18,7 +18,7 @@ const routes=[
   {path: '/', component: Layout, children:[
     {path: '', component: Index},
     {path: '/signup', component: SignUp},
-    {path: '/newdog', component: DogsMap},
+    {path: '/dogsmap', component: DogsMap},
     {path: '/log-in', component: LogIn},
     {path: '/dogpage', component: DogPage}
   ]}
