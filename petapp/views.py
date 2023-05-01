@@ -13,13 +13,18 @@ from rest_framework.decorators import api_view, permission_classes
 import base64
 from django.core.files.base import ContentFile
 
+from rest_framework.authtoken.models import Token
+
 def index(request):
     return render(request, "frontend/index.html", {})
 
 @csrf_exempt
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def getdogs(request):
+    print('Request META:', request.META)
+    print('Token in header:', request.META.get('HTTP_AUTHORIZATION'))
+    print('Authenticated user:', request.user)
     return JsonResponse({
         'dogs': [
             dog.to_dict()

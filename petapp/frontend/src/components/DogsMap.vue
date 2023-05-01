@@ -48,9 +48,11 @@
                     </div>
                 </div>
 
-                <!-- MAP -->
-                <div class="col-auto">
-                    <img loading="auto" src="/media/map.png" width="800">
+                <!-- LIST OF DOGS -->
+                <div>
+                    <li v-for="dog in dogs" :key="dog.id">
+                        {{ dog.name_d }} - {{ dog.age_d }} - {{ dog.county_d }} - {{ dog.color_d }} - {{ dog.description_d }} - {{ dog.date_d }} - {{ dog.breed_d }} - {{ dog.gender_d }} - {{ dog.status_d }}
+                    </li>
                 </div>
             </div>
         </div>
@@ -67,6 +69,31 @@
     import axios from 'axios';
 
     export default{
+        data(){
+            return{
+                dogs: [],
+            }
+        },
+
+        async created(){
+            try{
+                const headers={
+                        "Content-Type": "application/json",
+                        Authorization: `Token ${localStorage.getItem("token")}`,
+                };
+                console.log("Headers:", headers);
+
+                const response=await axios.get('http://127.0.0.1:8000/petapp/getdogs/',{
+                    headers: headers
+                });
+
+                this.dogs=response.data.dogs;
+            }
+            catch(error){
+                console.error("Error fetching dogs: ", error);
+            }
+        },
+
         components:{
             AddDog
         },
