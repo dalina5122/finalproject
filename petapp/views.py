@@ -4,7 +4,6 @@ import json
 from .models import Cat, Dog
 from users.models import CustomUser
 from users.forms import SignUpForm
-from .forms import AddDog
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
@@ -18,17 +17,17 @@ def newdog(request):
         return JsonResponse({
             'dogs': [
                 dog.to_dict()
-                for dog in Dogs.objects.all()
+                for dog in Dog.objects.all()
             ]
         })
 
-    if request.methid=='POST':
+    if request.method=='POST':
         print('in post')
         print(request.user)
         print(request.FILES)
-        user=get_object_or_404(CustomUser, id=request.owner.id)
+        user=get_object_or_404(CustomUser, id=owner_id)
 
-        dog=Dogs.objects.create(
+        dog=Dog.objects.create(
             name_d=request.POST.get('name_d'),
             age_d=request.POST.get('age_d'),
             county_d=request.POST.get('county_d'),
@@ -43,35 +42,7 @@ def newdog(request):
         )
         return JsonResponse(dog.to_dict())
 
-    # user_id = request.user.id
-    # user = CustomUser.objects.get(id=user_id)
 
-    # if request.method=='POST':
-    #     form=AddDog(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         dog=form.save(commit=False, owner=user)
-    #         dog.save()
-    #         return redirect('newdog')
-    #     else:
-    #         print(form.errors)
-
-    # else: 
-    #     form=AddDog()
-    #     return render(request, 'adddog.html', {'form': form})
-
-
-
-    # if request.method=='POST':
-    #     form = AddDog(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         dog=form.save(commit=False)
-    #         dog.owner=request.user
-    #         dog.save()
-    #         return redirect('newdog')
-
-    # else:
-    #     form=AddDog()
-    # return render(request, 'adddog.html', {'form': form})
 
 
 

@@ -91,11 +91,8 @@
         dogFormData.append('status_d', new_status_d);
         console.log("this is form data")
         console.log(dogFormData)
-        let response=await fetch("http://localhost:8000/newdog/",{
+        let response=await fetch('http://127.0.0.1:8000/newdog/',{
           method: 'POST',
-          // mode: 'cors',
-          // credentials: 'include',
-          // referrerPolicy: "no-referrer",
           body: dogFormData,
         });
         

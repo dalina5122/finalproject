@@ -12,13 +12,15 @@ import SignUp from './components/SignUp.vue'
 import LogIn from './components/LogIn.vue'
 import Layout from './components/Layout.vue'
 import Index from './components/Index.vue'
+import DogPage from './components/DogPage.vue'
 
 const routes=[
   {path: '/', component: Layout, children:[
     {path: '', component: Index},
     {path: '/signup', component: SignUp},
     {path: '/newdog', component: DogsMap},
-    {path: '/log-in', component: LogIn}
+    {path: '/log-in', component: LogIn},
+    {path: '/dogpage', component: DogPage}
   ]}
 ]
 

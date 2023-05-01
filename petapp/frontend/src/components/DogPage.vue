@@ -1,0 +1,3 @@
+<template>
+    <h1>Dog 1</h1>
+</template>
