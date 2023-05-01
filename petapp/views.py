@@ -25,7 +25,7 @@ def newdog(request):
         print('in post')
         print(request.user)
         print(request.FILES)
-        user=get_object_or_404(CustomUser, id=owner_id)
+        user=get_object_or_404(CustomUser, id=request.user)
 
         dog=Dog.objects.create(
             name_d=request.POST.get('name_d'),
