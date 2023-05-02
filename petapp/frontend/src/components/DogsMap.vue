@@ -50,15 +50,22 @@
 
                 <!-- LIST OF DOGS -->
                 <div>
-                    <li v-for="dog in dogs" :key="dog.id">
-                        {{ dog.name_d }} - {{ dog.age_d }} - {{ dog.county_d }} - {{ dog.color_d }} - {{ dog.description_d }} - {{ dog.date_d }} - {{ dog.breed_d }} - {{ dog.gender_d }} - {{ dog.status_d }}
+                    <li v-for="dog in dogs" :key="dog.id" class="dog-list">
+                        <div class="dog-item">
+                            <div class="dog-picture">
+                                <img :src="getPicture(dog.picture_d)" alt="Dog picture" loading="auto">
+                            </div>
+                            <div class="dog-details">
+                                {{ dog.name_d }} - {{ dog.age_d }} - {{ dog.county_d }} - {{ dog.color_d }} - {{ dog.description_d }} - {{ dog.date_d }} - {{ dog.breed_d }} - {{ dog.gender_d }} - {{ dog.status_d }}
+                            </div>
+                        </div>
                     </li>
                 </div>
             </div>
         </div>
 
         <div v-if="showForm">
-            <AddDog />
+            <AddDog @dog-added="onDogAdded"/>
         </div>
     </div>
 </template>
@@ -97,8 +104,53 @@
             }
         },
 
+        methods:{
+            getPicture(pictureBase64){
+                if(pictureBase64){
+                    return 'data:image/jpeg;base64,' + pictureBase64;
+                }
+                else{
+                    return 'petimages';
+                }
+            },
+
+            onDogAdded(newDog) {
+                this.dogs.push(newDog);
+            },
+        },
+
         components:{
             AddDog
         }
     }
 </script>
+
+<style scoped>
+.dog-item {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.dog-details {
+    flex-grow: 1;
+}
+
+.dog-picture {
+    width: 100px;
+    height: 100px;
+}
+
+.dog-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dog-list{
+    list-style: none;
+}
+</style>

@@ -20,7 +20,6 @@ def index(request):
 
 @csrf_exempt
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
 def getdogs(request):
     print('Request META:', request.META)
     print('Token in header:', request.META.get('HTTP_AUTHORIZATION'))
@@ -67,7 +66,7 @@ def newdog(request):
             picture_d=image_content,
             owner=owner
         )
-        return JsonResponse(dog.to_dict())
+        return JsonResponse({'dog': dog.to_dict()})
 
 
 

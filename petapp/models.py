@@ -8,6 +8,9 @@ CustomUser=settings.AUTH_USER_MODEL
 
 from django.utils import timezone
 
+import base64
+
+
 class Dog(models.Model):
     GENDER_CHOICES_D = [
         ('M', 'Male'),
@@ -53,8 +56,15 @@ class Dog(models.Model):
         Use this to return a dictionary of the Answer object
         """
         owner_id = self.owner.id if self.owner else None
+
+        picture_base64 = ""
+        if self.picture_d:
+            with open(self.picture_d.path, "rb") as img_file:
+                picture_base64 = base64.b64encode(img_file.read()).decode("utf-8")
+
         return{
-            'picture_d': self.picture_d.url,
+            'id': self.id,
+            'picture_d': picture_base64,
             'age_d': self.age_d,
             'name_d': self.name_d,
             'county_d': self.county_d,

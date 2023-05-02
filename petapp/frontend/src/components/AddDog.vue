@@ -90,7 +90,7 @@
         console.log(new_entry)
 
         console.log("Sending data:", new_entry);
-        let response=await fetch('http://127.0.0.1:8000/newdog/',{
+        let response=await fetch('http://127.0.0.1:8000/petapp/newdog/',{
           method: 'POST',
           headers: {
             "Authorization": `Token ${localStorage.getItem("token")}`,
@@ -99,6 +99,11 @@
           body: JSON.stringify(new_entry),
         });
         
+        const responseData = await response.json();
+
+        console.log('Full response object:', response);
+        console.log('Response data:', responseData);
+
         if(response.ok){
           document.getElementById('name_d2').value="",
           document.getElementById('age_d2').value="",
@@ -109,8 +114,8 @@
           document.getElementById('breed_d2').value="",
           document.getElementById('gender_d2').value="",
           document.getElementById('status_d2').value="",
-          document.getElementById('picture_d2').value=""
-          this.$router.push('/dogsmap');
+          document.getElementById('picture_d2').value="",
+          this.$emit('dog-added', responseData.dog);        
         }
         else
           alert('Dog cannot be added');
