@@ -6,7 +6,9 @@
             <!-- DOG ICON -->
             <a class="navbar-brand">
                 <div>
-                    <img loading="auto" src="/media/dogicon.png" width="75">
+                    <router-link to="/catsmap">
+                        <img loading="auto" :src="dogIconSrc" @mouseover="dogIconSrc = dogIconSrcHover" @mouseout="dogIconSrc = '/media/dogicon.png'" width="75">
+                    </router-link>
                 </div>
             </a>
 
@@ -25,41 +27,43 @@
         <!-- SIDE MENU -->
         <div class="container-fluid">
             <div class="row flex-nowrap">
-                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
-                    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-black min-vh-50">
 
-                        <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-black text-decoration-none">
-                            <span class="fs-5 d-none d-sm-inline">MENU</span>
-                        </a>
-
-                        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                            <li class="nav-item nav-link">
-                                <a href="#" class="nav-link align-middle px-0">
-                                    <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-item nav-link">
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Pet Care</span></a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- LIST OF DOGS -->
+                <!-- DOGS LIST -->
                 <div>
-                    <li v-for="dog in dogs" :key="dog.id" class="dog-list">
-                        <div class="dog-item">
-                            <div class="dog-picture">
-                                <img :src="getPicture(dog.picture_d)" alt="Dog picture" loading="auto">
-                            </div>
-                            <div class="dog-details">
-                                {{ dog.name_d }} - {{ dog.age_d }} - {{ dog.county_d }} - {{ dog.color_d }} - {{ dog.description_d }} - {{ dog.date_d }} - {{ dog.breed_d }} - {{ dog.gender_d }} - {{ dog.status_d }}
-                            </div>
-                        </div>
-                    </li>
+                    <table class="table dog-table">
+                        <thead>
+                            <tr>
+                                <th>Picture</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>County</th>
+                                <th>Color</th>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Breed</th>
+                                <th>Gender</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr v-for="dog in dogs" :key="dog.id">
+                                <td class="dog-picture">
+                                    <img :src="getPicture(dog.picture_d)" alt="Dog picture" loading="auto">
+                                </td>
+
+                                <td>{{ dog.name_d }}</td>
+                                <td>{{ dog.age_d }}</td>
+                                <td>{{ dog.county_d }}</td>
+                                <td>{{ dog.color_d }}</td>
+                                <td>{{ dog.description_d }}</td>
+                                <td>{{ dog.date_d }}</td>
+                                <td>{{ dog.breed_d }}</td>
+                                <td>{{ dog.gender_d }}</td>
+                                <td>{{ dog.status_d }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -78,6 +82,8 @@
     export default{
         data(){
             return{
+                dogIconSrc: '/media/dogicon.png',
+                dogIconSrcHover: '/media/caticon.png',
                 showForm: false,
                 dogs: [],
             }
@@ -126,6 +132,15 @@
 </script>
 
 <style scoped>
+.dog-table {
+    width: 100%;
+    table-layout: fixed;
+}
+.dog-table th,
+.dog-table td {
+    white-space: normal;
+    word-wrap: break-word;
+}
 .dog-item {
     display: flex;
     flex-wrap: nowrap;
@@ -135,22 +150,15 @@
     border-bottom: 1px solid #ccc;
 }
 
-.dog-details {
-    flex-grow: 1;
-}
-
 .dog-picture {
     width: 100px;
     height: 100px;
+    object-fit: cover;
 }
 
 .dog-picture img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-.dog-list{
-    list-style: none;
 }
 </style>

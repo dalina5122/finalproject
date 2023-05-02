@@ -12,7 +12,7 @@ import SignUp from './components/SignUp.vue'
 import LogIn from './components/LogIn.vue'
 import Layout from './components/Layout.vue'
 import Index from './components/Index.vue'
-import DogPage from './components/DogPage.vue'
+import CatsMap from './components/CatsMap.vue'
 
 const routes=[
   {path: '/', component: Layout, children:[
@@ -20,7 +20,7 @@ const routes=[
     {path: '/signup', component: SignUp},
     {path: '/dogsmap', component: DogsMap},
     {path: '/log-in', component: LogIn},
-    {path: '/dogpage', component: DogPage}
+    {path: '/catsmap', component: CatsMap}
   ]}
 ]
 
