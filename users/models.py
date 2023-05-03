@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+# from petapp.models import Dog
 
 class CustomUser(AbstractUser):
     class Meta:
@@ -7,6 +8,7 @@ class CustomUser(AbstractUser):
 
     profile_image=models.ImageField(default='default.jpg', upload_to='profile_images/')
     date_of_birth=models.DateField(null=True)
+    dogs=models.ManyToManyField(to='petapp.Dog', blank=True)
 
     def __str__(self):
         """

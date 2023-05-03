@@ -32,18 +32,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'petapp',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "users.apps.UsersConfig",
-    # 'petapp.apps.PetappConfig',
-    # 'finalproject',
     'petapp',
     'corsheaders',
+    'users',
+    'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -66,8 +65,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:5173"
 ]
 
-ROOT_URLCONF = "petapp.urls"
-
+ROOT_URLCONF = "finalproject.urls"
 
 TEMPLATES = [
     {
@@ -85,10 +83,7 @@ TEMPLATES = [
     },
 ]
 
-# AUTH_USER_MODEL = 'petapp.User'
-
 WSGI_APPLICATION = "finalproject.wsgi.application"
-
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -143,3 +138,15 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+LOGIN_URL = 'login'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+}
+

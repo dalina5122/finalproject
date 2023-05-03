@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h2>Sign up</h2>
+    <!-- TITLE -->
+    <div>
+      <h2>Sign up</h2>
+    </div>
+
+    <!-- SIGNUP FORM -->
     <form @submit.prevent="submitForm" enctype="multipart/form-data">
       <input type="text" v-model="username" placeholder="Username" required>
       <input type="email" v-model="email" placeholder="Email" required>
@@ -15,8 +20,6 @@
 
 <script>
 import axios from 'axios';
-
-
 
 export default {
   data() {
@@ -43,9 +46,10 @@ export default {
       data.append('password1', this.password1);
       data.append('password2', this.password2);
 
-      axios.post('http://localhost:8000/signup/', data)
+      axios.post('http://localhost:8000/petapp/signup/', data)
         .then(response => {
           console.log(response.data);
+          this.$router.push('/dogsmap');
         })
         .catch(error => {
           console.log(error.response.data);

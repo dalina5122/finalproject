@@ -8,8 +8,8 @@ class DateInput(forms.DateInput):
 class SignUpForm(UserCreationForm):
     profile_image=forms.ImageField(widget=forms.FileInput)
     date_of_birth=forms.DateField(widget=DateInput)
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
+    password1=forms.CharField(label='Password', widget=forms.PasswordInput)
+    password2=forms.CharField(label='Confirm password', widget=forms.PasswordInput)
 
     class Meta:
         model = CustomUser
