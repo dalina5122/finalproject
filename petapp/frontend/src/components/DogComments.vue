@@ -21,7 +21,7 @@
     </div>
   </template>
   
-  <script>
+<script>
   import axios from "axios";
   
   export default {
@@ -39,11 +39,13 @@
       };
     },
     async created() {
+      console.log("dogId:", this.dogId);  // Debug print
       this.authenticated = localStorage.getItem("token") !== null;
       await this.fetchComments();
     },
     methods: {
       async fetchComments() {
+        console.log("fetchComments dogId:", this.dogId); // Debug print
         try {
           const response = await axios.get("http://127.0.0.1:8000/petapp/dogscomments/", {
             params: { dog_id: this.dogId },
@@ -79,7 +81,7 @@
       },
     },
   };
-  </script>
+</script>
   
   <style scoped>
   /* Add your styles here */

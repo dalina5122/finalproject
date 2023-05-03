@@ -1,12 +1,5 @@
 <template>
     <div class="container">
-
-      <!-- TITLE -->
-      <div class="text-info">
-        <h1>Welcome to App Name</h1>
-      </div>
-  
-      <!-- BUTTONS -->
       <div class="p-2">
         <!-- CREATE ACCOUNT -->
         <div>
@@ -26,7 +19,7 @@
 
         <!-- ARROW FOR SCROLLING DOWN -->
         <div class="fixed-bottom d-flex align-items-end justify-content-end">
-                <img loading="auto" src="/media/arrow.gif" width="100">
+            <img loading="auto" src="/media/arrow.gif" width="100">
         </div>
       </div>
     </div>

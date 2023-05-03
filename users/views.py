@@ -40,3 +40,6 @@ def login_user(request):
     else:
         return Response({'error': 'Invalid credentials'}, status=400)
 
+def login_form(request):
+    return render(request, 'login.html')
+

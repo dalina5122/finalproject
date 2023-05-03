@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- FORM FOR POSTING A NEW DOG -->
         <form @submit="postDog" enctype="multipart/form-data">
             <input type="file" id="picture_d2" required>
             <input type="text" id="name_d2" placeholder="Name" required>
@@ -36,6 +37,7 @@
   export default defineComponent({
     data() {
     return {
+        // OPTIONS FOR COUNTY, GENDER AND STATUS
         countyOptions: [{value: 'AB', label: 'Alba'}, {value: 'AR', label: 'Arad'}, {value: 'AG', label: 'Arges'}, {value:'BC', label: 'Bacau'}, {value: 'BH', label: 'Bihor'}, {value: 'BN', label:'Bistrita-Nasaud'}, {value: 'BT', label: 'Botosani'},
         {value: 'BV', label: 'Brasov'}, {value: 'BR', label: 'Braila'}, {value: 'BZ', label: 'Buzau'}, {value: 'CS', label: 'Caras-Severin'}, {value: 'CL', label: 'Calarasi'}, {value: 'CJ', label: 'Cluj'},
         {value: 'CT', label: 'Constanta'}, {value: 'CV', label: 'Covasna'}, {value: 'DB', label: 'Dambovita'}, {value: 'DJ', label: 'Dolj'}, {value: 'GL', label: 'Galati'}, {value: 'GR', label: 'Giurgiu'}, {value: 'GJ', label: 'Gorj'},
@@ -52,9 +54,9 @@
         event.preventDefault();
         let dogFormData=new FormData();
 
+        // PICTURE FORMATTING
         var input=document.getElementById('picture_d2');
         var new_picture_d=input.files[0];
-
         let new_picture_d_base64 = null;
         if (new_picture_d) {
           new_picture_d_base64 = await new Promise((resolve, reject) => {
@@ -117,6 +119,7 @@
           document.getElementById('picture_d2').value="",
           this.$emit('dog-added', responseData.dog);        
         }
+        
         else
           alert('Dog cannot be added');
       }

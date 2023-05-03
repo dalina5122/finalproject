@@ -1,10 +1,14 @@
 <template>
+    <!-- TITLE -->
+    <h1>LOGIN</h1>
+
+    <!-- LOGIN FORM -->
     <form @submit.prevent="login($event)" enctype="multipart/form-data">
       <input type="text" v-model="username" required>
       <input type="password" v-model="password" required>
       <button type="submit">Login</button>
     </form>
-    <h1>LOGIN</h1>
+    
 </template>
   
 <script>
@@ -20,11 +24,14 @@
     methods: {
       login(event) {
         event.preventDefault();
-        const data = new FormData();
-        data.append('username', this.username);
-        data.append('password', this.password);
+        // const data = new FormData();
+        // data.append('username', this.username);
+        // data.append('password', this.password);
 
-        axios.post('http://localhost:8000/petapp/login/', data)
+        axios.post('http://localhost:8000/petapp/login/', {
+          username: this.username,
+          password: this.password,
+        })
           .then(response => {
             console.log(response.data);
             const token = response.data.token;

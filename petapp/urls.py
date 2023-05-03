@@ -3,7 +3,7 @@ from django.views.generic.base import TemplateView
 
 from . import views
 
-from users.views import signup, login_user
+from users.views import signup, login_user, login_form
 
 from django.contrib import admin
 
@@ -16,5 +16,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('newdog/', views.newdog, name='newdog'),
     path('getdogs/', views.getdogs, name='getdogs'),
-    path('dogscomments/', DogCommentsView.as_view(), name='dogscomments'),
+    path('dogscomments/', views.DogCommentsView.as_view(), name='dogscomments'),
+    path('loginform/', login_form, name='loginform'),
 ]

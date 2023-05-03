@@ -21,7 +21,6 @@ from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 
 from petapp import views
-
 from users.views import signup
 
 urlpatterns = [

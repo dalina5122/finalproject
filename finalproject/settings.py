@@ -32,15 +32,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'petapp',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # 'petapp.apps.PetappConfig',
-    # 'finalproject',
     'petapp',
     'corsheaders',
     'users',
@@ -70,7 +67,6 @@ CSRF_TRUSTED_ORIGINS = [
 
 ROOT_URLCONF = "finalproject.urls"
 
-
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -87,10 +83,7 @@ TEMPLATES = [
     },
 ]
 
-# AUTH_USER_MODEL = 'petapp.User'
-
 WSGI_APPLICATION = "finalproject.wsgi.application"
-
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

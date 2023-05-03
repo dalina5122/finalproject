@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h2>Sign up</h2>
+    <!-- TITLE -->
+    <div>
+      <h2>Sign up</h2>
+    </div>
+
+    <!-- SIGNUP FORM -->
     <form @submit.prevent="submitForm" enctype="multipart/form-data">
       <input type="text" v-model="username" placeholder="Username" required>
       <input type="email" v-model="email" placeholder="Email" required>
