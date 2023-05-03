@@ -1,9 +1,11 @@
 <template>
     <div>
-      <header>
+      <header class="header-background">
         <div>
           <router-link to="/">
-            <img loading="auto" src="/media/oscar6.png" width="200">
+            <div>
+              <img loading="auto" src="/media/logo.png" width="300">
+            </div>
           </router-link>
         </div>
       </header>
@@ -12,3 +14,16 @@
       </main>
     </div>
 </template>
+
+<style scoped>
+
+.header-background{
+  background-image: url('/media/paws.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% auto; 
+  width: 1000px;
+  height: 100%;
+}
+
+</style>
