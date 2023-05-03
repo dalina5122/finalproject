@@ -63,14 +63,6 @@
                                     <td>{{ dog.gender_d }}</td>
                                     <td>{{ dog.status_d }}</td>
                                 </tr>
-                                
-                                <tr>
-                                    <td colspan="10">
-                                        <div>
-                                            <dog-comments :dog-id="dog.id"></dog-comments>
-                                        </div>
-                                    </td>
-                                </tr>
                             </template>
                         </tbody>
                     </table>
@@ -87,7 +79,6 @@
 
 <script>
     import AddDog from '../components/AddDog.vue';
-    import DogComments from '../components/DogComments.vue';
     import axios from 'axios';
 
     export default{
@@ -138,7 +129,6 @@
 
         components:{
             AddDog,
-            DogComments,
         }
     }
 </script>

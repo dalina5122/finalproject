@@ -15,14 +15,6 @@ from django.core.files.base import ContentFile
 
 from rest_framework.authtoken.models import Token
 
-from django.views import View
-
-from django.contrib.auth.mixins import LoginRequiredMixin
-
-from django.http import QueryDict
-
-from django.utils.decorators import method_decorator
-
 def index(request):
     return render(request, "frontend/index.html", {})
 
@@ -78,81 +70,54 @@ def newdog(request):
         )
         return JsonResponse({'dog': dog.to_dict()})
 
-# DOGS COMMENT SECTION
-class DogCommentsView(View):
-    @method_decorator(csrf_exempt, name='dispatch')
-    def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
+# LIST OF CATS
+@csrf_exempt
+@api_view(['GET'])
+def getcats(request):
+    print('Request META:', request.META)
+    print('Token in header:', request.META.get('HTTP_AUTHORIZATION'))
+    print('Authenticated user:', request.user)
+    return JsonResponse({
+        'cats': [
+            cat.to_dict()
+            for cat in Cat.objects.all()
+        ]
+    })
 
+# POSTING CAT
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def newcat(request):
+    print('Token in header:', request.META.get('HTTP_AUTHORIZATION'))
 
-    def get(self, request, *args, **kwargs):
-        print('GET request parameters:', request.GET)  # Debug print
-        dog_id = request.GET.get('dog_id', None)
-        print('GET request dog_id:', dog_id)  # Debug print
+    if request.method=='POST':
+        print("Received data:", request.body.decode('utf-8'))
+        print('in post')
+        print(request.user)
+        print(request.FILES)
+        owner=request.user
 
-        if dog_id:
-            try:
-                dog = Dog.objects.get(id=dog_id)
-                comments = Comments_Dog.objects.filter(dog=dog).select_related('user')
+        data = json.loads(request.body)
+        print("Received data:", data)
+        image_data = data.get("picture_c")
+        image_content = None
+        if image_data:
+            format, imgstr = image_data.split(';base64,')
+            ext = format.split('/')[-1]
+            image_content = ContentFile(base64.b64decode(imgstr), name=f'{request.POST.get("name_c")}.{ext}')
 
-                comments_json = []
-
-                for comment in comments:
-                    comments_json.append({
-                        'id': comment.id,
-                        'user': {
-                            'username': comment.user.username
-                        },
-                        'content_d': comment.content_d,
-                        'timestamp_d': comment.timestamp_d
-                    })
-
-                return JsonResponse(comments_json, safe=False)
-
-            except Dog.DoesNotExist:
-                pass
-
-        return JsonResponse({"error": "Invalid request: Missing or invalid dog_id"}, status=400)
-
-    def post(self, request, *args, **kwargs):
-        body = json.loads(request.body)
-        dog_id = body.get('dog_id', None)
-        content_d = body.get('content_d', None)
-
-        print('POST request body:', body)  # Debug print
-        print('POST request dog_id:', dog_id)  # Debug print
-        print('POST request content_d:', content_d)  # Debug print
-
-        print('Request headers:', request.META)
-        print('Request user:', request.user)
-
-        if request.user.is_authenticated and dog_id and content_d:
-            try:
-                dog = Dog.objects.get(id=dog_id)
-
-                new_comment = Comments_Dog.objects.create(
-                    user=request.user,
-                    dog=dog,
-                    content_d=content_d
-                )
-
-                comment_json = {
-                    'id': new_comment.id,
-                    'user': {
-                        'username': new_comment.user.username
-                    },
-                    'content_d': new_comment.content_d,
-                    'timestamp_d': new_comment.timestamp_d
-                }
-
-                print('Comment JSON:', comment_json)  # Debug print
-                return JsonResponse(comment_json, status=201)
-
-            except Dog.DoesNotExist:
-                print('Dog.DoesNotExist')  # Debug print
-                pass
-
-        else:
-            print('Not authenticated, dog_id, or content_d missing')
-
-        return JsonResponse({"error": "Invalid request"}, status=400)
+        cat = Cat.objects.create(
+            name_c=data.get('name_c'),
+            age_c=data.get('age_c'),
+            county_c=data.get('county_c'),
+            color_c=data.get('color_c'),
+            description_c=data.get('description_c'),
+            date_c=data.get('date_c'),
+            breed_c=data.get('breed_c'),
+            gender_c=data.get('gender_c'),
+            status_c=data.get('status_c'),
+            picture_c=image_content,
+            owner=owner
+        )
+        return JsonResponse({'cat': cat.to_dict()})
