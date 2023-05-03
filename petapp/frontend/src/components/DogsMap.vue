@@ -47,21 +47,31 @@
                         </thead>
 
                         <tbody>
-                            <tr v-for="dog in dogs" :key="dog.id">
-                                <td class="dog-picture">
-                                    <img :src="getPicture(dog.picture_d)" alt="Dog picture" loading="auto">
-                                </td>
+                            <template v-for="dog in dogs" :key="dog.id">
+                                <tr>
+                                    <td class="dog-picture">
+                                        <img :src="getPicture(dog.picture_d)" alt="Dog picture" loading="auto">
+                                    </td>
 
-                                <td>{{ dog.name_d }}</td>
-                                <td>{{ dog.age_d }}</td>
-                                <td>{{ dog.county_d }}</td>
-                                <td>{{ dog.color_d }}</td>
-                                <td>{{ dog.description_d }}</td>
-                                <td>{{ dog.date_d }}</td>
-                                <td>{{ dog.breed_d }}</td>
-                                <td>{{ dog.gender_d }}</td>
-                                <td>{{ dog.status_d }}</td>
-                            </tr>
+                                    <td>{{ dog.name_d }}</td>
+                                    <td>{{ dog.age_d }}</td>
+                                    <td>{{ dog.county_d }}</td>
+                                    <td>{{ dog.color_d }}</td>
+                                    <td>{{ dog.description_d }}</td>
+                                    <td>{{ dog.date_d }}</td>
+                                    <td>{{ dog.breed_d }}</td>
+                                    <td>{{ dog.gender_d }}</td>
+                                    <td>{{ dog.status_d }}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="10">
+                                        <div>
+                                            <dog-comments :dog-id="dog.id"></dog-comments>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
                         </tbody>
                     </table>
                 </div>
@@ -77,6 +87,7 @@
 
 <script>
     import AddDog from '../components/AddDog.vue';
+    import DogComments from '../components/DogComments.vue';
     import axios from 'axios';
 
     export default{
@@ -126,7 +137,8 @@
         },
 
         components:{
-            AddDog
+            AddDog,
+            DogComments,
         }
     }
 </script>

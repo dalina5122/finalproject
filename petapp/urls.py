@@ -7,6 +7,7 @@ from users.views import signup, login_user
 
 from django.contrib import admin
 
+from .views import DogCommentsView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -15,4 +16,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('newdog/', views.newdog, name='newdog'),
     path('getdogs/', views.getdogs, name='getdogs'),
+    path('dogscomments/', DogCommentsView.as_view(), name='dogscomments'),
 ]

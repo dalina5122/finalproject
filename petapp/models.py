@@ -46,15 +46,9 @@ class Dog(models.Model):
     owner=models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='dogs_owned', null=True)
 
     def __str__(self):
-        """
-        Display the object name when printing the object
-        """
         return self.name_d
 
     def to_dict(self):
-        """
-        Use this to return a dictionary of the Answer object
-        """
         owner_id = self.owner.id if self.owner else None
 
         picture_base64 = ""
@@ -109,23 +103,22 @@ class Cat(models.Model):
     breed_c=models.CharField(max_length=200, default=' ')
     gender_c=models.CharField(max_length=1, choices=GENDER_CHOICES_C, default=' ')
     status_c=models.CharField(max_length=8, choices=STATUS_C, default=' ')
-    username=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
-    id=models.AutoField(primary_key=True, default=1)
-
+    owner=models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        """
-        Display the object name when printing the object
-        """
         return self.name_c
 
     def to_dict(self):
-        """
-        Use this to return a dictionary of the Answer object
-        """
+        owner_id = self.owner.id if self.owner else None
+
+        picture_base64 = ""
+        if self.picture_c:
+            with open(self.picture_c.path, "rb") as img_file:
+                picture_base64 = base64.b64encode(img_file.read()).decode("utf-8")
+
         return{
             'id': self.id,
-            'picture_c': self.picture_c.url,
+            'picture_c': picture_base64,
             'age_c': self.age_c,
             'name_c': self.name_c,
             'county_c': self.county_c,
@@ -135,5 +128,24 @@ class Cat(models.Model):
             'breed_c': self.breed_c,
             'gender_c': self.gender_c,
             'status_c':self.status_c,
-            'username': self.username.id,
+            'owner': self.owner.id,
         }
+
+class Comments_Dog(models.Model):
+    user=models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
+    dog=models.ForeignKey(Dog, on_delete=models.CASCADE, null=True)
+    content_d=models.TextField()
+    timestamp_d=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.content_d
+
+class Comments_Cat(models.Model):
+    user=models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
+    cat=models.ForeignKey(Cat, on_delete=models.CASCADE, null=True)
+    content_c=models.TextField()
+    timestamp_c=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.content_c
+

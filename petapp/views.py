@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse, HttpRequest, HttpResponseBadRequest
 import json
-from .models import Cat, Dog
+from .models import Cat, Dog, Comments_Dog
 from users.models import CustomUser
 from users.forms import SignUpForm
 from django.views.decorators.csrf import csrf_exempt
@@ -15,9 +15,15 @@ from django.core.files.base import ContentFile
 
 from rest_framework.authtoken.models import Token
 
+from django.views import View
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
 def index(request):
     return render(request, "frontend/index.html", {})
 
+# LIST OF DOGS
 @csrf_exempt
 @api_view(['GET'])
 def getdogs(request):
@@ -31,6 +37,7 @@ def getdogs(request):
         ]
     })
 
+# POSTING DOG
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -68,8 +75,61 @@ def newdog(request):
         )
         return JsonResponse({'dog': dog.to_dict()})
 
+# DOGS COMMENT SECTION
+class DogCommentsView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        dog_id = request.GET.get('dog_id', None)
 
+        if dog_id:
+            try:
+                dog = Dog.objects.get(id=dog_id)
+                comments = Comments_Dog.objects.filter(dog=dog).select_related('user')
 
+                comments_json = []
 
+                for comment in comments:
+                    comments_json.append({
+                        'id': comment.id,
+                        'user': {
+                            'username': comment.user.username
+                        },
+                        'content_d': comment.content_d,
+                        'timestamp_d': comment.timestamp_d
+                    })
 
+                return JsonResponse(comments_json, safe=False)
 
+            except Dog.DoesNotExist:
+                pass
+
+        return JsonResponse({"error": "Invalid request"}, status=400)
+
+    def post(self, request, *args, **kwargs):
+        dog_id = request.POST.get('dog_id', None)
+        content_d = request.POST.get('content_d', None)
+
+        if request.user.is_authenticated and dog_id and content_d:
+            try:
+                dog = Dog.objects.get(id=dog_id)
+
+                new_comment = Comments_Dog.objects.create(
+                    user=request.user,
+                    dog=dog,
+                    content_d=content_d
+                )
+
+                comment_json = {
+                    'id': new_comment.id,
+                    'user': {
+                        'username': new_comment.user.username
+                    },
+                    'content_d': new_comment.content_d,
+                    'timestamp_d': new_comment.timestamp_d
+                }
+
+                return JsonResponse(comment_json, status=201)
+
+            except Dog.DoesNotExist:
+                pass
+
+        return JsonResponse({"error": "Invalid request"}, status=400)
