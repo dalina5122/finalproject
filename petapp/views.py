@@ -16,7 +16,7 @@ from django.core.files.base import ContentFile
 from rest_framework.authtoken.models import Token
 
 def index(request):
-    return render(request, "frontend/index.html", {})
+    return render(request, "petapp/index.html", {})
 
 # LIST OF DOGS
 @csrf_exempt

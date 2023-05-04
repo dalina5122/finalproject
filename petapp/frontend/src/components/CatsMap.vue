@@ -16,10 +16,24 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- POST BUTTON -->
             <div class="collapse navbar-collapse">
+                <!-- POST BUTTON -->
                 <div class="nav navbar-nav">
-                     <button class="btn btn-outline-success my-2 my-sm-0" @click="showForm=true">NEW POST</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" @click="showForm=true">NEW POST</button>
+                </div>
+
+                <!-- LOG OUT BUTTON -->
+                <div class="ms-auto">
+                    <router-link to="/">
+                        <img loading="auto" src="media/logout.png" @click="logout" width="75">
+                    </router-link>
+                </div>
+
+                <!-- PROFILE BUTTON -->
+                <div class="ms-auto">
+                    <router-link to="/profile">
+                        <img loading="auto" src="media/profile.png" width="75">
+                    </router-link>
                 </div>
             </div>   
         </nav>
@@ -124,6 +138,10 @@
 
             onCatAdded(newCat) {
                 this.cats.push(newCat);
+            },
+
+            logout(){
+                localStorage.removeItem("token");
             },
         },
 

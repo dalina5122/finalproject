@@ -18,7 +18,7 @@
         </div>
 
         <!-- ARROW FOR SCROLLING DOWN -->
-        <div class="fixed-bottom d-flex align-items-end justify-content-end">
+        <div>
             <img loading="auto" src="/media/arrow.gif" width="100">
         </div>
       </div>

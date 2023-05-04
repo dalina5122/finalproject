@@ -1,6 +1,5 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-# from petapp.models import Dog
 
 class CustomUser(AbstractUser):
     class Meta:
