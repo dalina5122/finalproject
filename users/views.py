@@ -6,21 +6,22 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib.auth import authenticate, login
 
-from rest_framework.decorators import permission_classes, authentication_classes
+from rest_framework.decorators import permission_classes, authentication_classes, api_view, parser_classes
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
-
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 
 from django.contrib.auth.decorators import login_required
+
+from django.core.files.storage import default_storage
+from rest_framework.parsers import MultiPartParser
 
 @csrf_exempt
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST, request.FILES)
+
         if form.is_valid():
             user = form.save()
             return JsonResponse({'success': True, 'user_id': user.id})
@@ -57,5 +58,18 @@ def get_user_details(request):
     user = token.user
     user_details = user.to_dict()
     return JsonResponse({'user': user_details})
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+@parser_classes([MultiPartParser])
+def update_image(request):
+    image = request.FILES['image']
+    user = request.user
+    user.profile_image.delete(save=False)
+    user.profile_image = image
+    user.save()
+    user_details = user.to_dict()
+    return Response({'user': user_details})
 
 

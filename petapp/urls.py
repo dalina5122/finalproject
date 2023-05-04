@@ -3,7 +3,7 @@ from django.views.generic.base import TemplateView
 
 from . import views
 
-from users.views import signup, login_user, login_form, get_user_details
+from users.views import signup, login_user, login_form, get_user_details, update_image
 
 from django.contrib import admin
 
@@ -21,6 +21,8 @@ urlpatterns = [
     path('newcat/', views.newcat, name='newcat'),
     path('getcats/', views.getcats, name='getcats'),
     path('getuserdetails/', get_user_details, name='getuserdetails'),
+    path('updateimage/', update_image, name='updateimage'),
+
 ]
 
 if settings.DEBUG:

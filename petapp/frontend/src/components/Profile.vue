@@ -1,10 +1,11 @@
 <template>
     <img loading='auto' src="media/profiletitle.png" width="400">
-    <div class="row">
+
+    <div class="row border border-secondary rounded">
 
       <div class="col-sm-4">
-        <img :src="user.profile_image" alt="Profile Image" width="200"/>
-        <button class="btn btn-outline-info my-2 my-sm-0">EDIT PICTURE</button>
+        <img :src="user.profile_image" alt="Profile Image" width="200" class="rounded"/>
+        <button @click="showImageUpdate=!showImageUpdate" class="btn btn-outline-info my-2 my-sm-0">EDIT PICTURE</button>
 
       </div>
 
@@ -20,6 +21,14 @@
       </div>
 
     </div>
+
+    <div class="updateimage" v-if="showImageUpdate">
+      <h4>Change your Picture</h4>
+      <form @submit.prevent="updateImage">
+        <input type="file" @change="onFileSelected" />
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Change</button>
+      </form>
+    </div>
   </template>
   
   <script>
@@ -29,8 +38,41 @@
     data() {
       return {
         user: {},
+        showImageUpdate: false,
       };
     },
+
+    methods:{
+      onFileSelected(event) {
+        this.selectedFile = event.target.files[0];
+      },
+
+      async updateImage() {
+        if (!this.selectedFile) {
+          alert("Please select an image file to upload.");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("image", this.selectedFile);
+
+        try {
+          const headers = {
+            Authorization: `Token ${localStorage.getItem("token")}`,
+          };
+          const response = await axios.post(
+            "http://127.0.0.1:8000/petapp/updateimage/",
+            formData,
+            { headers: headers }
+          );
+          this.user = response.data.user;
+          alert("Profile image updated successfully.");
+        } catch (error) {
+          console.error("Error updating profile image: ", error);
+        }
+        },
+    },
+
     async created() {
       try {
         const headers = {
