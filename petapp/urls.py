@@ -7,6 +7,9 @@ from users.views import signup, login_user, login_form, get_user_details
 
 from django.contrib import admin
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('', views.index, name='index'),
     path("admin/", admin.site.urls),
@@ -19,3 +22,6 @@ urlpatterns = [
     path('getcats/', views.getcats, name='getcats'),
     path('getuserdetails/', get_user_details, name='getuserdetails'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
