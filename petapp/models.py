@@ -8,7 +8,7 @@ CustomUser=settings.AUTH_USER_MODEL
 
 from django.utils import timezone
 
-import base64
+import base64, os
 
 
 class Dog(models.Model):
@@ -53,7 +53,8 @@ class Dog(models.Model):
 
         picture_base64 = ""
         if self.picture_d:
-            with open(self.picture_d.path, "rb") as img_file:
+            image_path = os.path.join(settings.PET_IMAGES_ROOT, os.path.basename(self.picture_d.name))
+            with open(image_path, "rb") as img_file:
                 picture_base64 = base64.b64encode(img_file.read()).decode("utf-8")
 
         return{
@@ -113,7 +114,8 @@ class Cat(models.Model):
 
         picture_base64 = ""
         if self.picture_c:
-            with open(self.picture_c.path, "rb") as img_file:
+            image_path = os.path.join(settings.PET_IMAGES_ROOT, os.path.basename(self.picture_c.name))
+            with open(image_path, "rb") as img_file:
                 picture_base64 = base64.b64encode(img_file.read()).decode("utf-8")
 
         return{

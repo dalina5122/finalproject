@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
+import os
 
 class CustomUser(AbstractUser):
     class Meta:
@@ -15,7 +16,7 @@ class CustomUser(AbstractUser):
 
     def to_dict(self):
         domain = 'http://127.0.0.1:8000'
-        profile_image_url = domain+settings.MEDIA_URL+str(self.profile_image)
+        profile_image_url = domain+settings.PROFILE_IMAGES_URL+os.path.basename(str(self.profile_image))
         return{
             'id': self.id,
             'date_of_birth': self.date_of_birth,

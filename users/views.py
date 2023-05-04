@@ -17,6 +17,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.files.storage import default_storage
 from rest_framework.parsers import MultiPartParser
 
+# SIGN UP
 @csrf_exempt
 def signup(request):
     if request.method == 'POST':
@@ -32,6 +33,7 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+# LOG IN
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -49,6 +51,7 @@ def login_user(request):
 def login_form(request):
     return render(request, 'login.html')
 
+# GET DETAILS OF LOGGED IN USER
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([TokenAuthentication])
@@ -59,6 +62,7 @@ def get_user_details(request):
     user_details = user.to_dict()
     return JsonResponse({'user': user_details})
 
+# PROFILE IMAGE UPDATE
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([TokenAuthentication])

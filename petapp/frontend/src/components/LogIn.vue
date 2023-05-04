@@ -24,10 +24,6 @@
     methods: {
       login(event) {
         event.preventDefault();
-        // const data = new FormData();
-        // data.append('username', this.username);
-        // data.append('password', this.password);
-
         axios.post('http://localhost:8000/petapp/login/', {
           username: this.username,
           password: this.password,
@@ -36,7 +32,7 @@
             console.log(response.data);
             const token = response.data.token;
             localStorage.setItem('token', token);
-            this.$router.push('/dogsmap');
+            this.$router.push('/menupage');
           })
           .catch(error => {
             console.log(error.response.data);

@@ -150,3 +150,12 @@ REST_FRAMEWORK = {
     ],
 }
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+PET_IMAGES_URL='/pet_images/'
+PET_IMAGES_ROOT=os.path.join(BASE_DIR, 'pet_images')
+
+PROFILE_IMAGES_URL='/profile_images/'
+PROFILE_IMAGES_ROOT=os.path.join(BASE_DIR, 'profile_images')
+

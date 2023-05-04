@@ -14,6 +14,8 @@ import Layout from './components/Layout.vue'
 import Index from './components/Index.vue'
 import CatsMap from './components/CatsMap.vue'
 import Profile from './components/Profile.vue'
+import MenuPage from './components/MenuPage.vue'
+import InfoPage from './components/InfoPage.vue'
 
 const routes=[
   {path: '/', component: Layout, children:[
@@ -22,7 +24,9 @@ const routes=[
     {path: '/dogsmap', component: DogsMap},
     {path: '/log-in', component: LogIn},
     {path: '/catsmap', component: CatsMap},
-    {path: '/profile', component: Profile}
+    {path: '/profile', component: Profile},
+    {path: '/menupage', component: MenuPage},
+    {path: '/infopage', component: InfoPage},
   ]}
 ]
 

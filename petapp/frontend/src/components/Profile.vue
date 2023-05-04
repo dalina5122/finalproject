@@ -29,6 +29,12 @@
         <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Change</button>
       </form>
     </div>
+
+    <div>
+      <router-link to="/">
+        <img loading="auto" src="media/logout.png" @click="logout" width="75">
+      </router-link>
+    </div>
   </template>
   
   <script>
@@ -60,17 +66,25 @@
           const headers = {
             Authorization: `Token ${localStorage.getItem("token")}`,
           };
+
           const response = await axios.post(
             "http://127.0.0.1:8000/petapp/updateimage/",
             formData,
             { headers: headers }
           );
+
           this.user = response.data.user;
           alert("Profile image updated successfully.");
-        } catch (error) {
+        } 
+        
+        catch (error) {
           console.error("Error updating profile image: ", error);
         }
-        },
+      },
+
+      logout(){
+        localStorage.removeItem("token");
+      },
     },
 
     async created() {

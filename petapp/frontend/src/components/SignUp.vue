@@ -49,7 +49,7 @@ export default {
       axios.post('http://localhost:8000/petapp/signup/', data)
         .then(response => {
           console.log(response.data);
-          this.$router.push('/dogsmap');
+          this.$router.push('/menupage');
         })
         .catch(error => {
           console.log(error.response.data);
