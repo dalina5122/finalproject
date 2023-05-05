@@ -18,7 +18,7 @@
 <style scoped>
 
 .header-background{
-  background-image: url('/media/paws.gif');
+  /* background-image: url('/media/paws.gif'); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% auto; 
