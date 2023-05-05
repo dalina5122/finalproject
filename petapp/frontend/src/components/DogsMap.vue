@@ -63,20 +63,22 @@
 
                         <tbody>
                             <template v-for="dog in dogs" :key="dog.id">
-                                <tr>
-                                    <td class="dog-picture">
-                                        <img :src="getPicture(dog.picture_d)" alt="Dog picture" loading="auto">
-                                    </td>
+                                <tr @click="$router.push('/dogdetails/${dog.id}')">
+                                    <tr>
+                                        <td class="dog-picture">
+                                            <img :src="getPicture(dog.picture_d)" alt="Dog picture" loading="auto">
+                                        </td>
 
-                                    <td>{{ dog.name_d }}</td>
-                                    <td>{{ dog.age_d }}</td>
-                                    <td>{{ dog.county_d }}</td>
-                                    <td>{{ dog.color_d }}</td>
-                                    <td>{{ dog.description_d }}</td>
-                                    <td>{{ dog.date_d }}</td>
-                                    <td>{{ dog.breed_d }}</td>
-                                    <td>{{ dog.gender_d }}</td>
-                                    <td>{{ dog.status_d }}</td>
+                                        <td>{{ dog.name_d }}</td>
+                                        <td>{{ dog.age_d }}</td>
+                                        <td>{{ dog.county_d }}</td>
+                                        <td>{{ dog.color_d }}</td>
+                                        <td>{{ dog.description_d }}</td>
+                                        <td>{{ dog.date_d }}</td>
+                                        <td>{{ dog.breed_d }}</td>
+                                        <td>{{ dog.gender_d }}</td>
+                                        <td>{{ dog.status_d }}</td>
+                                    </tr>
                                 </tr>
                             </template>
                         </tbody>

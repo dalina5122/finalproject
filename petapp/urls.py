@@ -22,6 +22,7 @@ urlpatterns = [
     path('getcats/', views.getcats, name='getcats'),
     path('getuserdetails/', get_user_details, name='getuserdetails'),
     path('updateimage/', update_image, name='updateimage'),
+    path('dogdetails/<int:dog_id>', views.dogdetails, name='dogdetails'),
 
 ]
 

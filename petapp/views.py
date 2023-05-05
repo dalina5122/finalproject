@@ -70,6 +70,16 @@ def newdog(request):
         )
         return JsonResponse({'dog': dog.to_dict()})
 
+# GET INDIVIDUAL DOG
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def dogdetails(request, dog_id):
+    try:
+        dog = Dog.objects.get(id=dog_id)
+        return JsonResponse({'dog': dog.to_dict()})
+    except Dog.DoesNotExist:
+        return JsonResponse({'error': 'Dog not found'}, status=404)
+
 # LIST OF CATS
 @csrf_exempt
 @api_view(['GET'])
