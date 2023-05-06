@@ -2,10 +2,10 @@
     <div class="row border border-secondary rounded">
 
       <div class="col-sm-4">
-      <div class="image-container">
-        <img :src="getPicture(dog.picture_d)" alt="Picture" width="200" class="rounded"/>
+        <div class="image-container">
+          <img :src="getPicture(dog.picture_d)" alt="Picture" width="200" class="rounded"/>
+        </div>
       </div>
-    </div>
 
       <div class="col-sm-6">
         <dl class="row">
@@ -40,7 +40,32 @@
 
     </div>
 
-  </template>
+    <div>
+      <form @submit.prevent="postComment">
+        <div class="form-group">
+          <label for="comment">Comment:</label>
+          <textarea class="form-control" id="comment" v-model="newComment" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <h3>Comments</h3>
+        <div v-for="(comment, index) in comments" :key="index" class="card mb-2">
+          <div class="card-body">
+            <h5 class="card-title">{{ comment.user.username }}</h5>
+            <p class="card-text">{{ comment.content_d }}</p>
+            <p class="card-text">
+              <small class="text-muted">{{ comment.timestamp_d }}</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</template>
   
 <script>
   import axios from 'axios';
@@ -50,6 +75,8 @@
       return {
         dog: {},
         ownerId: null,
+        comments: [],
+        newComment: '',
       };
     },
 
@@ -83,6 +110,8 @@
       catch (error) {
         console.error('Error fetching dog details:', error);
       }
+
+      this.fetchComments(this.$route.params.id);
     },
 
     methods:{
@@ -93,6 +122,50 @@
 
         else{
           return 'petimages';
+        }
+      },
+
+      async fetchComments(dogId) {
+        try {
+          const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${localStorage.getItem('token')}`,
+          };
+
+          const response = await axios.get(`http://127.0.0.1:8000/petapp/commentsd/${dogId}`, {
+            headers: headers,
+          });
+
+          this.comments = response.data;
+        } 
+
+        catch (error) {
+          console.error('Error fetching comments:', error);
+        }
+      },
+
+      async postComment() {
+        try {
+          const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${localStorage.getItem('token')}`,
+          };
+
+          const payload = {
+            dog: this.dog.id,
+            content_d: this.newComment,
+          };
+
+          const response = await axios.post('http://127.0.0.1:8000/petapp/createcommentd/', payload, {
+            headers: headers,
+          });
+
+          this.comments.push(response.data);
+          this.newComment = '';
+        } 
+        
+        catch (error) {
+          console.error('Error posting comment:', error);
         }
       },
     }

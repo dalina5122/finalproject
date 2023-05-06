@@ -85,6 +85,49 @@ def dogdetails(request, dog_id):
         print("Dog not found")
         return JsonResponse({'error': 'Dog not found'}, status=404)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_comments_d(request, dog_id):
+    comments = Comments_Dog.objects.filter(dog=dog_id).order_by('-timestamp_d')
+    comments_data = [
+        {
+            'user': {
+                'id': comment.user.id,
+                'username': comment.user.username
+            },
+            'dog': comment.dog.id,
+            'content_d': comment.content_d,
+            'timestamp_d': comment.timestamp_d.isoformat(),
+        }
+        for comment in comments
+    ]
+    return JsonResponse(comments_data, safe=False)
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_comment_d(request):
+    user = request.user
+    dog_id = request.data['dog']
+    content = request.data['content_d']
+
+    dog = Dog.objects.get(id=dog_id)
+
+    comment = Comments_Dog(user=user, dog=dog, content_d=content)
+    comment.save()
+
+    response_data = {
+        'user': {
+            'id': comment.user.id,
+            'username': comment.user.username
+        },
+        'dog': comment.dog.id,
+        'content_d': comment.content_d,
+        'timestamp_d': comment.timestamp_d.isoformat(),
+    }
+
+    return JsonResponse(response_data, safe=False)
+
 # -----------------------------------------------------------------------------------------------------
 
 # LIST OF CATS
