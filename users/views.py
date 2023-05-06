@@ -62,6 +62,15 @@ def get_user_details(request):
     user_details = user.to_dict()
     return JsonResponse({'user': user_details})
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def get_user_id(request):
+    token_key = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
+    token = Token.objects.get(key=token_key)
+    user = token.user
+    return JsonResponse({'id': user.id})
+
 # PROFILE IMAGE UPDATE
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

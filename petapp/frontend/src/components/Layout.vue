@@ -2,7 +2,7 @@
     <div>
       <header class="header-background">
         <div>
-          <router-link to="/">
+          <router-link to="/menupage">
             <div>
               <img loading="auto" src="/media/logo.png" width="300">
             </div>

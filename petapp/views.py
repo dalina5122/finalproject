@@ -8,12 +8,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, parser_classes, authentication_classes
 
 import base64
 from django.core.files.base import ContentFile
 
 from rest_framework.authtoken.models import Token
+
 
 def index(request):
     return render(request, "petapp/index.html", {})
@@ -71,14 +72,20 @@ def newdog(request):
         return JsonResponse({'dog': dog.to_dict()})
 
 # GET INDIVIDUAL DOG
+@csrf_exempt
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
 def dogdetails(request, dog_id):
+    print("dog_id:", dog_id)
     try:
         dog = Dog.objects.get(id=dog_id)
+        print("Found dog:", dog)
         return JsonResponse({'dog': dog.to_dict()})
+
     except Dog.DoesNotExist:
+        print("Dog not found")
         return JsonResponse({'error': 'Dog not found'}, status=404)
+
+# -----------------------------------------------------------------------------------------------------
 
 # LIST OF CATS
 @csrf_exempt

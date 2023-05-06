@@ -28,12 +28,12 @@ const routes=[
     {path: '/profile', component: Profile},
     {path: '/menupage', component: MenuPage},
     {path: '/infopage', component: InfoPage},
-    {path: '/dogdetails/:id', component: DogDetails, name: 'DogDetails'},
+    {path: '/dogdetails/:id', component: DogDetails, name: 'DogDetails', props: true},
   ]}
 ]
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URLs),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
 
