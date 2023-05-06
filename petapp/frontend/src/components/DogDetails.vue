@@ -3,12 +3,14 @@
 
       <div class="col-sm-4">
         <div class="image-container">
+          <!-- PICTURE -->
           <img :src="getPicture(dog.picture_d)" alt="Picture" width="200" class="rounded"/>
         </div>
       </div>
 
       <div class="col-sm-6">
         <dl class="row">
+          <!-- REST OF DATA -->
           <dt class="col-sm-3">Name: </dt>
           <dd class="col-sm-9"> {{ dog.name_d }} </dd>
 
@@ -40,6 +42,7 @@
 
     </div>
 
+    <!-- POST A NEW COMMENT -->
     <div>
       <form @submit.prevent="postComment">
         <div class="form-group">
@@ -50,6 +53,7 @@
       </form>
     </div>
 
+    <!-- LIST OF COMMENTS -->
     <div class="row">
       <div class="col">
         <h3>Comments</h3>
