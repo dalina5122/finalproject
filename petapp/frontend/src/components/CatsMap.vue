@@ -63,19 +63,19 @@
                         <tbody>
                             <template v-for="cat in cats" :key="cat.id">
                                 <tr>
-                                    <td class="cat-picture">
+                                    <td class="cat-picture" @click="$router.push(`/catdetails/${cat.id}`)" style="cursor: pointer;">
                                         <img :src="getPicture(cat.picture_c)" alt="Cat picture" loading="auto">
                                     </td>
 
-                                    <td>{{ cat.name_c }}</td>
-                                    <td>{{ cat.age_c }}</td>
-                                    <td>{{ cat.county_c }}</td>
-                                    <td>{{ cat.color_c }}</td>
-                                    <td>{{ cat.description_c }}</td>
-                                    <td>{{ cat.date_c }}</td>
-                                    <td>{{ cat.breed_c }}</td>
-                                    <td>{{ cat.gender_c }}</td>
-                                    <td>{{ cat.status_c }}</td>
+                                    <td @click="$router.push(`/catdetails/${cat.id}`)" style="cursor: pointer;">{{ cat.name_c }}</td>
+                                    <td @click="$router.push(`/catdetails/${cat.id}`)" style="cursor: pointer;">{{ cat.age_c }}</td>
+                                    <td @click="$router.push(`/catdetails/${cat.id}`)" style="cursor: pointer;">{{ cat.county_c }}</td>
+                                    <td @click="$router.push(`/catdetails/${cat.id}`)" style="cursor: pointer;">{{ cat.color_c }}</td>
+                                    <td @click="$router.push(`/catdetails/${cat.id}`)" style="cursor: pointer;">{{ cat.description_c }}</td>
+                                    <td @click="$router.push(`/catdetails/${cat.id}`)" style="cursor: pointer;">{{ cat.date_c }}</td>
+                                    <td @click="$router.push(`/catdetails/${cat.id}`)" style="cursor: pointer;">{{ cat.breed_c }}</td>
+                                    <td @click="$router.push(`/catdetails/${cat.id}`)" style="cursor: pointer;">{{ cat.gender_c }}</td>
+                                    <td @click="$router.push(`/catdetails/${cat.id}`)" style="cursor: pointer;">{{ cat.status_c }}</td>
                                 </tr>
                             </template>
                         </tbody>

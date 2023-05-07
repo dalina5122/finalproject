@@ -17,6 +17,7 @@ import Profile from './components/Profile.vue'
 import MenuPage from './components/MenuPage.vue'
 import InfoPage from './components/InfoPage.vue'
 import DogDetails from './components/DogDetails.vue'
+import CatDetails from './components/CatDetails.vue'
 
 const routes=[
   {path: '/', component: Layout, children:[
@@ -29,6 +30,7 @@ const routes=[
     {path: '/menupage', component: MenuPage},
     {path: '/infopage', component: InfoPage},
     {path: '/dogdetails/:id', component: DogDetails, name: 'DogDetails', props: true},
+    {path: '/catdetails/:id', component: CatDetails, name: 'CatDetails', props: true},
   ]}
 ]
 

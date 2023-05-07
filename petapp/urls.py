@@ -23,9 +23,12 @@ urlpatterns = [
     path('getuserdetails/', get_user_details, name='getuserdetails'),
     path('updateimage/', update_image, name='updateimage'),
     path('dogdetails/<int:dog_id>', views.dogdetails),
+    path('catdetails/<int:cat_id>', views.catdetails),
     path('getuserid/', get_user_id, name='getuserid'),
     path('commentsd/<int:dog_id>/', views.get_comments_d, name='commentsd'),
     path('createcommentd/', views.create_comment_d, name='createcommentd'),
+    path('commentsc/<int:cat_id>/', views.get_comments_c, name='commentsc'),
+    path('createcommentc/', views.create_comment_c, name='createcommentc'),
 ]
 
 if settings.DEBUG:
