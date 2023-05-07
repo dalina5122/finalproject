@@ -17,7 +17,7 @@
             <div
                 v-for="(county, index) in counties.slice(4, 5)"
                 :key="index"
-                class="county-item"
+                class="county-item tall-county"
                 @click="selectCounty(county.code)"
             >
                 <img :src="county.image" :alt="county.name" loading="auto" class="county-image" />
@@ -49,7 +49,7 @@
             <div
                 v-for="(county, index) in counties.slice(9, 10)"
                 :key="index"
-                class="county-item"
+                class="county-item tall-county"
                 @click="selectCounty(county.code)"
             >
                 <img :src="county.image" :alt="county.name" loading="auto" class="county-image" />
@@ -86,7 +86,7 @@
                 <div
                     v-for="(county, index) in counties.slice(14, 16)"
                     :key="index"
-                    class="county-item"
+                    class="county-item third-row"
                     @click="selectCounty(county.code)"
                 >
                     <img :src="county.image" :alt="county.name" loading="auto" class="county-image" />
@@ -96,7 +96,7 @@
                 <div
                     v-for="(county, index) in counties.slice(16, 18)"
                     :key="index"
-                    class="county-item"
+                    class="county-item third-row"
                     @click="selectCounty(county.code)"
                 >
                     <img :src="county.image" :alt="county.name" loading="auto" class="county-image" />
@@ -107,7 +107,7 @@
             <div
                 v-for="(county, index) in counties.slice(18, 23)"
                 :key="index"
-                class="county-item"
+                class="county-item tall-county third-row"
                 @click="selectCounty(county.code)"
             >
                 <img :src="county.image" :alt="county.name" loading="auto" class="county-image" />
@@ -119,7 +119,7 @@
             <div
                 v-for="(county, index) in counties.slice(23, 32)"
                 :key="index"
-                class="county-item"
+                class="county-item fourth-row"
                 @click="selectCounty(county.code)"
             >
                 <img :src="county.image" :alt="county.name" loading="auto" class="county-image" />
@@ -131,7 +131,7 @@
             <div
                 v-for="(county, index) in counties.slice(32, 36)"
                 :key="index"
-                class="county-item"
+                class="county-item tall-county"
                 @click="selectCounty(county.code)"
             >
                 <img :src="county.image" :alt="county.name" loading="auto" class="county-image" />
@@ -163,7 +163,7 @@
             <div
                 v-for="(county, index) in counties.slice(40, 41)"
                 :key="index"
-                class="county-item"
+                class="county-item tall-county"
                 @click="selectCounty(county.code)"
             >
                 <img :src="county.image" :alt="county.name" loading="auto" class="county-image" />
@@ -187,11 +187,19 @@ export default {
 
 <style scoped>
 .county-rows {
-  margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+/* 
+    background: url('/media/ro.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 100px; */
 }
 
 .county-row {
-  display: flex;
+  display: inline-flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
@@ -206,11 +214,29 @@ export default {
 
 .county-item {
   cursor: pointer;
+  margin-left: 5px;
+  margin-right: 15px;
+  margin-top: -10px;
+  margin-bottom: -20px;
+  width: 100px;
+  height: 100px;
+}
+
+.tall-county{
+    height: 130px;
+}
+
+.fourth-row{
+    margin-right: 1px;
+}
+
+.third-row{
+    margin-right: 50px;
 }
 
 .county-image {
-  width: 125%;
-  height: 125%;
+  width: 150%;
+  height: 150%;
   object-fit: cover;
 }
 </style>
