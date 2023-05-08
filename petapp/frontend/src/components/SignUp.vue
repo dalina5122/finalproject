@@ -2,19 +2,48 @@
   <div>
     <!-- TITLE -->
     <div>
-      <h2>Sign up</h2>
+      <img loading="auto" src="/media/signuptitle.png" width="200">
     </div>
 
     <!-- SIGNUP FORM -->
     <form @submit.prevent="submitForm" enctype="multipart/form-data">
-      <input type="text" v-model="username" placeholder="Username" required>
-      <input type="email" v-model="email" placeholder="Email" required>
-      <input type="date" v-model="date_of_birth" placeholder="Date of Birth" required>
-      <input type="file" v-on:change="onFileChange" ref="fileInput">
-      <input type="password" v-model="password1" placeholder="Password" required>
-      <input type="password" v-model="password2" placeholder="Confirm Password" required>
-      <button type="submit">Sign up</button>
+      <div class="rounded p-2">
+        <input type="text" v-model="username" placeholder="Username" required>
+      </div>
+
+      <div class="rounded p-2">
+        <input type="email" v-model="email" placeholder="Email" required>
+      </div>
+
+      <div class="rounded p-2">
+        Date of Birth: 
+        <input type="date" v-model="date_of_birth" placeholder="Date of Birth" required>
+      </div>
+
+      <div class="rounded p-2">
+        Picture: 
+        <input type="file" v-on:change="onFileChange" ref="fileInput">
+      </div>
+
+      <div class="rounded p-2">
+        <input type="password" v-model="password1" placeholder="Password" required>
+      </div>
+
+      <div class="rounded p-2">
+        <input type="password" v-model="password2" placeholder="Confirm Password" required>
+      </div>
+
+      <div class="rounded p-4">
+        <button type="submit">Sign up</button>
+      </div>
     </form>
+
+    <div>
+      Already have an account?
+      <router-link to="/log-in">
+        <button class="btn btn-outline-info my-2 my-sm-0">Log In</button>
+      </router-link>
+    </div>
   </div>
 </template>
 
