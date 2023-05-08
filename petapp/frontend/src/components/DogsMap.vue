@@ -53,13 +53,8 @@
                             <tr>
                                 <th>Picture</th>
                                 <th>Name</th>
-                                <th>Age</th>
-                                <th>County</th>
-                                <th>Color</th>
-                                <th>Description</th>
                                 <th>Date</th>
                                 <th>Breed</th>
-                                <th>Gender</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -72,13 +67,8 @@
                                     </td>
 
                                     <td @click="$router.push(`/dogdetails/${dog.id}`)" style="cursor: pointer;">{{ dog.name_d }}</td>
-                                    <td @click="$router.push(`/dogdetails/${dog.id}`)" style="cursor: pointer;">{{ dog.age_d }}</td>
-                                    <td @click="$router.push(`/dogdetails/${dog.id}`)" style="cursor: pointer;">{{ dog.county_d }}</td>
-                                    <td @click="$router.push(`/dogdetails/${dog.id}`)" style="cursor: pointer;">{{ dog.color_d }}</td>
-                                    <td @click="$router.push(`/dogdetails/${dog.id}`)" style="cursor: pointer;">{{ dog.description_d }}</td>
                                     <td @click="$router.push(`/dogdetails/${dog.id}`)" style="cursor: pointer;">{{ dog.date_d }}</td>
                                     <td @click="$router.push(`/dogdetails/${dog.id}`)" style="cursor: pointer;">{{ dog.breed_d }}</td>
-                                    <td @click="$router.push(`/dogdetails/${dog.id}`)" style="cursor: pointer;">{{ dog.gender_d }}</td>
                                     <td @click="$router.push(`/dogdetails/${dog.id}`)" style="cursor: pointer;">{{ dog.status_d }}</td>
                                 </tr>
                             </template>
@@ -235,14 +225,14 @@
 }
 
 .dog-picture {
-    width: 100px;
+    width: 50px;
     height: 100px;
     object-fit: cover;
 }
 
 .dog-picture img {
-    width: 100%;
-    height: 100%;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
 }
 </style>

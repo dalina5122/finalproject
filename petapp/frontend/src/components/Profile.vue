@@ -1,12 +1,13 @@
 <template>
     <img loading='auto' src="media/profiletitle.png" width="400">
 
-    <div class="row border border-secondary rounded">
+    <div class="row border border-secondary rounded align-items-center p-5">
 
       <div class="col-sm-4">
-        <img :src="user.profile_image" alt="Profile Image" width="200" class="rounded"/>
-        <button @click="showImageUpdate=!showImageUpdate" class="btn btn-outline-info my-2 my-sm-0">EDIT PICTURE</button>
-
+        <div class="profile-column">
+          <img :src="user.profile_image" alt="Profile Image" width="200" class="rounded"/>
+          <button @click="showImageUpdate=!showImageUpdate" class="btn btn-outline-info my-2 my-sm-0">EDIT PICTURE</button>
+        </div>
       </div>
 
       <div class="col-sm-6">
@@ -103,3 +104,13 @@
     },
   };
   </script>
+
+<style scoped>
+.profile-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  }
+</style>

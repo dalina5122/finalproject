@@ -30,23 +30,25 @@
                 </ul>
             </div>
 
-            <div class="col-sm border">
-                Besides making a post on our application, here are additional steps that you
-                can take if you found a pet:
+            <div class="col-sm border d-flex align-items-center">
+                <div>
+                    Besides making a post on our application, here are additional steps that you
+                    can take if you found a pet:
 
-                <ul class="list-unstyled">
-                    <li>
-                        check for a collar and any information that you may find on it
-                    </li>
+                    <ul class="list-unstyled">
+                        <li>
+                            - check for a collar and any information that you may find on it
+                        </li>
 
-                    <li>
-                        take the pet to a veterinarian so that he can check if the pet has a microchip
-                    </li>
+                        <li>
+                            - take the pet to a veterinarian so that he can check if the pet has a microchip
+                        </li>
 
-                    <li>
-                        take care of it until you find its owner
-                    </li>
-                </ul>
+                        <li>
+                            - take care of it until you find its owner
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

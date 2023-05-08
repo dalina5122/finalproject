@@ -1,4 +1,7 @@
 <template>
+    <div>
+        Click on a county to filter the list:
+    </div>
     <div class="county-rows">
         <!-- FIRST ROW -->
         <div class="county-row">
@@ -190,12 +193,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-/* 
-    background: url('/media/ro.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 100px; */
 }
 
 .county-row {
