@@ -129,14 +129,14 @@
         }
       },
 
-      async fetchComments(dogId) {
+      async fetchComments(catId) {
         try {
           const headers = {
             'Content-Type': 'application/json',
             Authorization: `Token ${localStorage.getItem('token')}`,
           };
 
-          const response = await axios.get(`http://127.0.0.1:8000/petapp/commentsc/${dogId}`, {
+          const response = await axios.get(`http://127.0.0.1:8000/petapp/commentsc/${catId}`, {
             headers: headers,
           });
 

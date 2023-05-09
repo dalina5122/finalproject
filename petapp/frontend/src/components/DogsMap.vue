@@ -152,7 +152,7 @@
         computed: {
             filteredDogs() {
                 if (this.selectedCounty) {
-                return this.dogs.filter((dog) => dog.county_d === this.selectedCounty);
+                    return this.dogs.filter((dog) => dog.county_d === this.selectedCounty);
                 }
                 return this.dogs;
             },

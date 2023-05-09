@@ -2,8 +2,6 @@ from django.conf import settings
 
 from django.db import models
 
-# from django.contrib.auth import get_user_model
-# CustomUser = get_user_model()
 CustomUser=settings.AUTH_USER_MODEL
 
 from django.utils import timezone
