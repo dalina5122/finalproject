@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-# from petapp.models import Dog
+from django.conf import settings
+import os
 
 class CustomUser(AbstractUser):
     class Meta:
@@ -11,19 +12,15 @@ class CustomUser(AbstractUser):
     dogs=models.ManyToManyField(to='petapp.Dog', blank=True)
 
     def __str__(self):
-        """
-        Display the object name when printing the object
-        """
         return self.username
 
     def to_dict(self):
-        """
-        Use this to return a dictionary of the User object
-        """
+        domain = 'http://127.0.0.1:8000'
+        profile_image_url = domain+settings.PROFILE_IMAGES_URL+os.path.basename(str(self.profile_image))
         return{
             'id': self.id,
             'date_of_birth': self.date_of_birth,
             'username' : self.username,
             'email' : self.email,
-            'profile_image' : self.profile_image.url,
+            'profile_image' : profile_image_url,
         }

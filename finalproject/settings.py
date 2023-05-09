@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-y_$s4ylm*gexde7+2i9x_i*iyi!gg6ux(2nxrr42kgh-)i%g3m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -150,3 +150,11 @@ REST_FRAMEWORK = {
     ],
 }
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+PET_IMAGES_URL='/pet_images/'
+PET_IMAGES_ROOT=os.path.join(BASE_DIR, 'pet_images')
+
+PROFILE_IMAGES_URL='/profile_images/'
+PROFILE_IMAGES_ROOT=os.path.join(BASE_DIR, 'profile_images')

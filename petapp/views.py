@@ -1,22 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse, HttpRequest, HttpResponseBadRequest
 import json
-from .models import Cat, Dog, Comments_Dog
+from .models import Cat, Dog, Comments_Dog, Comments_Cat
 from users.models import CustomUser
 from users.forms import SignUpForm
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, parser_classes, authentication_classes
 
 import base64
 from django.core.files.base import ContentFile
 
 from rest_framework.authtoken.models import Token
 
+
 def index(request):
-    return render(request, "frontend/index.html", {})
+    return render(request, "petapp/index.html", {})
 
 # LIST OF DOGS
 @csrf_exempt
@@ -70,6 +71,67 @@ def newdog(request):
         )
         return JsonResponse({'dog': dog.to_dict()})
 
+# GET INDIVIDUAL DOG
+@csrf_exempt
+@api_view(['GET'])
+def dogdetails(request, dog_id):
+    print("dog_id:", dog_id)
+    try:
+        dog = Dog.objects.get(id=dog_id)
+        print("Found dog:", dog)
+        return JsonResponse({'dog': dog.to_dict()})
+
+    except Dog.DoesNotExist:
+        print("Dog not found")
+        return JsonResponse({'error': 'Dog not found'}, status=404)
+
+# LIST OF COMMENTS
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_comments_d(request, dog_id):
+    comments = Comments_Dog.objects.filter(dog=dog_id).order_by('-timestamp_d')
+    comments_data = [
+        {
+            'user': {
+                'id': comment.user.id,
+                'username': comment.user.username
+            },
+            'dog': comment.dog.id,
+            'content_d': comment.content_d,
+            'timestamp_d': comment.timestamp_d.isoformat(),
+        }
+        for comment in comments
+    ]
+    return JsonResponse(comments_data, safe=False)
+
+# POST NEW COMMENT
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_comment_d(request):
+    user = request.user
+    dog_id = request.data['dog']
+    content = request.data['content_d']
+
+    dog = Dog.objects.get(id=dog_id)
+
+    comment = Comments_Dog(user=user, dog=dog, content_d=content)
+    comment.save()
+
+    response_data = {
+        'user': {
+            'id': comment.user.id,
+            'username': comment.user.username
+        },
+        'dog': comment.dog.id,
+        'content_d': comment.content_d,
+        'timestamp_d': comment.timestamp_d.isoformat(),
+    }
+
+    return JsonResponse(response_data, safe=False)
+
+# -----------------------------------------------------------------------------------------------------
+
 # LIST OF CATS
 @csrf_exempt
 @api_view(['GET'])
@@ -121,3 +183,62 @@ def newcat(request):
             owner=owner
         )
         return JsonResponse({'cat': cat.to_dict()})
+
+# GET INDIVIDUAL CAT
+@csrf_exempt
+@api_view(['GET'])
+def catdetails(request, cat_id):
+    print("cat_id:", cat_id)
+    try:
+        cat = Cat.objects.get(id=cat_id)
+        print("Found cat:", cat)
+        return JsonResponse({'cat': cat.to_dict()})
+
+    except Cat.DoesNotExist:
+        print("Cat not found")
+        return JsonResponse({'error': 'Cat not found'}, status=404)
+
+# LIST OF COMMENTS
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_comments_c(request, cat_id):
+    comments = Comments_Cat.objects.filter(cat=cat_id).order_by('-timestamp_c')
+    comments_data = [
+        {
+            'user': {
+                'id': comment.user.id,
+                'username': comment.user.username
+            },
+            'cat': comment.cat.id,
+            'content_c': comment.content_c,
+            'timestamp_c': comment.timestamp_c.isoformat(),
+        }
+        for comment in comments
+    ]
+    return JsonResponse(comments_data, safe=False)
+
+# POST NEW COMMENT
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_comment_c(request):
+    user = request.user
+    cat_id = request.data['cat']
+    content = request.data['content_c']
+
+    cat = Cat.objects.get(id=cat_id)
+
+    comment = Comments_Cat(user=user, cat=cat, content_c=content)
+    comment.save()
+
+    response_data = {
+        'user': {
+            'id': comment.user.id,
+            'username': comment.user.username
+        },
+        'cat': comment.cat.id,
+        'content_c': comment.content_c,
+        'timestamp_c': comment.timestamp_c.isoformat(),
+    }
+
+    return JsonResponse(response_data, safe=False)

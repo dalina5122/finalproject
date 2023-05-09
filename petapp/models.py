@@ -2,13 +2,11 @@ from django.conf import settings
 
 from django.db import models
 
-# from django.contrib.auth import get_user_model
-# CustomUser = get_user_model()
 CustomUser=settings.AUTH_USER_MODEL
 
 from django.utils import timezone
 
-import base64
+import base64, os
 
 
 class Dog(models.Model):
@@ -22,8 +20,8 @@ class Dog(models.Model):
         ('AB', 'Alba'), ('AR', 'Arad'), ('AG', 'Arges'), ('BC', 'Bacau'), ('BH', 'Bihor'), ('BN', 'Bistrita-Nasaud'), ('BT', 'Botosani'),
         ('BV', 'Brasov'), ('BR', 'Braila'), ('BZ', 'Buzau'), ('CS', 'Caras-Severin'), ('CL', 'Calarasi'), ('CJ', 'Cluj'),
         ('CT', 'Constanta'), ('CV', 'Covasna'), ('DB', 'Dambovita'), ('DJ', 'Dolj'), ('GL', 'Galati'), ('GR', 'Giurgiu'), ('GJ', 'Gorj'),
-        ('HR', 'Harghita'), ('HD', 'Hunedoara'), ('IL', 'Ialomita'), ('IS', 'Iasi'), ('MM', 'Maramures'), ('MH', 'Mehedinti'), ('MS', 'Mures'),
-        ('OT', 'Olt'), ('PH', 'Prahova'), ('SM', 'Satu Mare'), ('SJ', 'Salaj'), ('SB', 'Sibiu'), ('SV', 'Suceava'), ('TR', 'Teleorman'),
+        ('HR', 'Harghita'), ('HD', 'Hunedoara'), ('IL', 'Ialomita'), ('IS', 'Iasi'), ('IF', 'Ilfov'), ('MM', 'Maramures'), ('MH', 'Mehedinti'), ('MS', 'Mures'),
+        ('NT', 'Neamt'), ('OT', 'Olt'), ('PH', 'Prahova'), ('SM', 'Satu Mare'), ('SJ', 'Salaj'), ('SB', 'Sibiu'), ('SV', 'Suceava'), ('TR', 'Teleorman'),
         ('TM', 'Timis'), ('TL', 'Tulcea'), ('VS', 'Vaslui'), ('VL', 'Valcea'), ('VN', 'Vrancea'),
     ]
 
@@ -53,7 +51,8 @@ class Dog(models.Model):
 
         picture_base64 = ""
         if self.picture_d:
-            with open(self.picture_d.path, "rb") as img_file:
+            image_path = os.path.join(settings.PET_IMAGES_ROOT, os.path.basename(self.picture_d.name))
+            with open(image_path, "rb") as img_file:
                 picture_base64 = base64.b64encode(img_file.read()).decode("utf-8")
 
         return{
@@ -82,8 +81,8 @@ class Cat(models.Model):
         ('AB', 'Alba'), ('AR', 'Arad'), ('AG', 'Arges'), ('BC', 'Bacau'), ('BH', 'Bihor'), ('BN', 'Bistrita-Nasaud'), ('BT', 'Botosani'),
         ('BV', 'Brasov'), ('BR', 'Braila'), ('BZ', 'Buzau'), ('CS', 'Caras-Severin'), ('CL', 'Calarasi'), ('CJ', 'Cluj'),
         ('CT', 'Constanta'), ('CV', 'Covasna'), ('DB', 'Dambovita'), ('DJ', 'Dolj'), ('GL', 'Galati'), ('GR', 'Giurgiu'), ('GJ', 'Gorj'),
-        ('HR', 'Harghita'), ('HD', 'Hunedoara'), ('IL', 'Ialomita'), ('IS', 'Iasi'), ('MM', 'Maramures'), ('MH', 'Mehedinti'), ('MS', 'Mures'),
-        ('OT', 'Olt'), ('PH', 'Prahova'), ('SM', 'Satu Mare'), ('SJ', 'Salaj'), ('SB', 'Sibiu'), ('SV', 'Suceava'), ('TR', 'Teleorman'),
+        ('HR', 'Harghita'), ('HD', 'Hunedoara'), ('IL', 'Ialomita'), ('IS', 'Iasi'), ('IF', 'Ilfov'), ('MM', 'Maramures'), ('MH', 'Mehedinti'), ('MS', 'Mures'),
+        ('NT', 'Neamt'), ('OT', 'Olt'), ('PH', 'Prahova'), ('SM', 'Satu Mare'), ('SJ', 'Salaj'), ('SB', 'Sibiu'), ('SV', 'Suceava'), ('TR', 'Teleorman'),
         ('TM', 'Timis'), ('TL', 'Tulcea'), ('VS', 'Vaslui'), ('VL', 'Valcea'), ('VN', 'Vrancea'),
     ]
 
@@ -113,7 +112,8 @@ class Cat(models.Model):
 
         picture_base64 = ""
         if self.picture_c:
-            with open(self.picture_c.path, "rb") as img_file:
+            image_path = os.path.join(settings.PET_IMAGES_ROOT, os.path.basename(self.picture_c.name))
+            with open(image_path, "rb") as img_file:
                 picture_base64 = base64.b64encode(img_file.read()).decode("utf-8")
 
         return{

@@ -18,16 +18,54 @@
         </div>
 
         <!-- ARROW FOR SCROLLING DOWN -->
-        <div class="fixed-bottom d-flex align-items-end justify-content-end">
-            <img loading="auto" src="/media/arrow.gif" width="100">
+        <div>
+            <button class="scroll-down" @click="scrollDown">
+                <img loading="auto" src="/media/arrow.gif" width="100">
+            </button>
         </div>
       </div>
+    </div>
+
+    <!-- INTRODUCTION -->
+    <div>
+        <img class="intro" loading="auto" src="/media/intro.png" width="1200">
+
+        <button class="btn btn-outline-info my-2 my-sm-0" @click="scrollUp"> Would you like to get started? </button>
     </div>
 </template>
 
 <script>
+    export default{
+        methods:{
+            scrollDown() {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth',
+                });
+            },
 
+            scrollUp(){
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                })
+            }
+        }
+    }
 </script>
+
+<style scoped>
+.intro{
+    margin-top: 200px;
+}
+
+.scroll-down{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+</style>
 
 
 
