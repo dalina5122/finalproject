@@ -1,4 +1,4 @@
-# finalproject
+# Lovin' Pets
 Description:
 My Final Year Project called "Lovin' Pets" created with the purpose of helping the situation of strays in Romania. 
 Users can create an account and then either navigate through the list of pets, post a comment, post a new pet, or learn new things.
