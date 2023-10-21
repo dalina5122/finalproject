@@ -3,8 +3,6 @@ Description:
 My Final Year Project called "Lovin' Pets" created with the purpose of helping the situation of strays in Romania. 
 Users can create an account and then either navigate through the list of pets, post a comment, post a new pet, or learn new things.
 
-For the frontend part the following have been used: HTML, CSS, JavaScript, and Vue.js, whereas for the backend there were Python and Django.
-
 To run:
 - type "python manage.py runserver" in terminal
 - type "cd petapp", then "cd frontend", then "npm run dev" in another terminal
